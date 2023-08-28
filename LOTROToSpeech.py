@@ -5,6 +5,9 @@ import threading
 import os
 import time
 import pyttsx3
+import cv2
+import numpy as np
+import pyautogui
 
 pytesseract.pytesseract.tesseract_cmd = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
@@ -75,6 +78,25 @@ class RectangleDrawer:
         self.stop_monitoring()
         self.root.destroy()
 
+    def is_image_on_screen(self):
+        # Load the image to detect
+        image_to_detect = cv2.imread("quest.png")
+
+        # Capture the screen
+        screenshot = pyautogui.screenshot()
+
+        # Convert the screenshot to an OpenCV format
+        screenshot_np = np.array(screenshot)
+        screenshot_cv = cv2.cvtColor(screenshot_np, cv2.COLOR_RGB2BGR)
+
+        # Use template matching to find the image on the screen
+        result = cv2.matchTemplate(screenshot_cv, image_to_detect, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+
+        # If a match is found above the threshold, return True
+        if max_val > 0.7:
+            return True
+
     def monitor_loop(self):
         while self.monitoring:
             if self.end_x < self.start_x:
@@ -90,7 +112,7 @@ class RectangleDrawer:
             # by removing the spaces, it also remove pauses whenever there is a line breaker, which speeds up the text speech!
             text = text.replace('\n', ' ')
 
-            if text:
+            if text and self.is_image_on_screen():
                 # Convert text to speech and play it
                 engine.say(text)
                 engine.runAndWait()
