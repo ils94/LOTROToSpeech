@@ -87,6 +87,9 @@ class RectangleDrawer:
             print("Text within the rectangle:")
             print(text)
 
+            # by removing the spaces, it also remove pauses whenever there is a line breaker, which speeds up the text speech!
+            text = text.replace('\n', ' ')
+
             if text:
                 # Convert text to speech and play it
                 engine.say(text)
