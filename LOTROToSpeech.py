@@ -4,8 +4,17 @@ import pytesseract
 import threading
 import os
 import time
+import pyttsx3
 
 pytesseract.pytesseract.tesseract_cmd = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+engine.setProperty('rate', 150)
+
+for voice in voices:
+    if "EN-US" in voice.id:
+        engine.setProperty('voice', voice.id)
 
 
 class RectangleDrawer:
@@ -77,6 +86,12 @@ class RectangleDrawer:
             text = pytesseract.image_to_string(screenshot)
             print("Text within the rectangle:")
             print(text)
+
+            if text:
+                # Convert text to speech and play it
+                engine.say(text)
+                engine.runAndWait()
+
             time.sleep(0.5)
 
 
