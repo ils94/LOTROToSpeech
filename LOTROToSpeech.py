@@ -18,6 +18,7 @@ engine.setProperty('rate', 150)
 for voice in voices:
     if "EN-US" in voice.id:
         engine.setProperty('voice', voice.id)
+        break
 
 
 class RectangleDrawer:
@@ -39,6 +40,32 @@ class RectangleDrawer:
         self.canvas.bind("<ButtonRelease-1>", self.on_release)
         self.root.bind("<Escape>", self.stop_monitoring)  # Bind ESC key to stop monitoring
 
+        self.start_x, self.start_y, self.end_x, self.end_y = self.load_coordinates()
+
+        if self.start_x:
+            if not self.monitoring:
+                self.start_monitoring()
+
+    def save_coordinates(self, start_x, start_y, end_x, end_y):
+        with open("coordinates.txt", "w") as file:
+            file.write(f"Start X: {start_x}\n")
+            file.write(f"Start Y: {start_y}\n")
+            file.write(f"End X: {end_x}\n")
+            file.write(f"End Y: {end_y}\n")
+
+    def load_coordinates(self):
+        try:
+            with open("coordinates.txt", "r") as file:
+                lines = file.readlines()
+                start_x = float(lines[0].split(":")[1].strip())
+                start_y = float(lines[1].split(":")[1].strip())
+                end_x = float(lines[2].split(":")[1].strip())
+                end_y = float(lines[3].split(":")[1].strip())
+                return start_x, start_y, end_x, end_y
+        except FileNotFoundError:
+            # Return default values if the file doesn't exist
+            return None, None, None, None
+
     def on_press(self, event):
         self.start_x = self.canvas.canvasx(event.x)
         self.start_y = self.canvas.canvasy(event.y)
@@ -58,6 +85,9 @@ class RectangleDrawer:
     def on_release(self, event):
         self.end_x = self.canvas.canvasx(event.x)
         self.end_y = self.canvas.canvasy(event.y)
+
+        # Save the coordinates to a text file
+        self.save_coordinates(self.start_x, self.start_y, self.end_x, self.end_y)
 
         # Start monitoring when the user finishes drawing the rectangle
         if not self.monitoring:
@@ -80,7 +110,8 @@ class RectangleDrawer:
 
     def is_image_on_screen(self):
         # Load the image to detect
-        image_to_detect = cv2.imread("quest.png")
+        image_to_detect_1 = cv2.imread("quest.png")
+        image_to_detect_2 = cv2.imread("nextObjective.png")
 
         # Capture the screen
         screenshot = pyautogui.screenshot()
@@ -90,11 +121,14 @@ class RectangleDrawer:
         screenshot_cv = cv2.cvtColor(screenshot_np, cv2.COLOR_RGB2BGR)
 
         # Use template matching to find the image on the screen
-        result = cv2.matchTemplate(screenshot_cv, image_to_detect, cv2.TM_CCOEFF_NORMED)
-        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+        result_1 = cv2.matchTemplate(screenshot_cv, image_to_detect_1, cv2.TM_CCOEFF_NORMED)
+        min_val_1, max_val_1, min_loc_1, max_loc_1 = cv2.minMaxLoc(result_1)
+
+        result_2 = cv2.matchTemplate(screenshot_cv, image_to_detect_2, cv2.TM_CCOEFF_NORMED)
+        min_val_2, max_val_2, min_loc_2, max_loc_2 = cv2.minMaxLoc(result_2)
 
         # If a match is found above the threshold, return True
-        if max_val > 0.7:
+        if max_val_1 > 0.7 or max_val_2 > 0.7:
             return True
 
     def monitor_loop(self):
@@ -106,11 +140,11 @@ class RectangleDrawer:
 
             screenshot = ImageGrab.grab(bbox=(self.start_x, self.start_y, self.end_x, self.end_y))
             text = pytesseract.image_to_string(screenshot)
-            print("Text within the rectangle:")
-            print(text)
 
             # by removing the spaces, it also remove pauses whenever there is a line breaker, which speeds up the text speech!
             text = text.replace('\n', ' ')
+
+            text = text.replace('This is a repeatable quest that you have previously completed.', '')
 
             if text and self.is_image_on_screen():
                 # Convert text to speech and play it
