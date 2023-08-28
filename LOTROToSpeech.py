@@ -3,6 +3,7 @@ from PIL import ImageGrab
 import pytesseract
 import threading
 import os
+import time
 
 pytesseract.pytesseract.tesseract_cmd = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
@@ -76,10 +77,13 @@ class RectangleDrawer:
             text = pytesseract.image_to_string(screenshot)
             print("Text within the rectangle:")
             print(text)
+            time.sleep(0.5)
 
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.title("LOTRO to Speech")
     root.attributes("-alpha", 0.5)
+    root.state('zoomed')
     app = RectangleDrawer(root)
     root.mainloop()
