@@ -13,7 +13,7 @@ After installing Tesseract download LTS (LOTRO To Speech - Windows TTS Version) 
 
 LTS download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTS.zip
 
-LTSEL download link:
+LTSEL download link: coming soon
 
 unzip the version you downloaded, and run either LTS.exe or LTSEL.exe inside the root folder
 
