@@ -11,7 +11,7 @@ https://github.com/UB-Mannheim/tesseract/wiki
 
 After installing Tesseract download LTS (LOTRO to Speech with Windows local TTS) or LTSEL (LOTRO to Speech Eleven Labs TTS)
 
-LTS download link: https://github.com/ils94/LOTROToSpeech/releases/download/v1.0/LTS.zip
+LTS download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTS.zip
 
 LTSEL download link:
 
@@ -52,7 +52,3 @@ Here is an example:
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial4.PNG?raw=true)
 
 If you do not add any voice name in the second line of api_key.txt, it will default the voice name to "Bella"
-
-# Download
-
-You can download the v1.0 from this link: https://github.com/ils94/LOTROToSpeech/releases/download/v1.0/LTS.zip
