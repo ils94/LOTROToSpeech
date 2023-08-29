@@ -35,7 +35,7 @@ Now hold CTRL and Mouse left button to drag a rectangle around the text of the q
 
 Tip: Resize the Quest Window as much as you can and leave the Quest Window to  the right of your screen, because if you leave it to your left, it may read your chat window.
 
-After you are done setting everything, you can minimize it (do not close LOTRO to Speech)
+After you are done setting everything, you can minimize it (do not close LOTRO To Speech)
 
 ----
 
