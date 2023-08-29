@@ -21,6 +21,12 @@ for voice in voices:
         break
 
 
+def tts_engine(text):
+    if text:
+        engine.say(text)
+        engine.runAndWait()
+
+
 def save_coordinates(cor_x, cor_y, e_x, e_y):
     with open("coordinates.txt", "w") as file:
         file.write(f"Start X: {cor_x}\n")
@@ -115,18 +121,13 @@ def monitor_loop():
             start_y, end_y = end_y, start_y
 
         if is_image_on_screen():
-
             screenshot = ImageGrab.grab(bbox=(start_x, start_y, end_x, end_y))
             text = pytesseract.image_to_string(screenshot)
 
             text = text.replace('\n', ' ')
             text = text.replace('This is a repeatable quest that you have previously completed.', '')
 
-            print(text)
-
-            if text:
-                engine.say(text)
-                engine.runAndWait()
+            tts_engine(text)
 
         time.sleep(0.5)
 
