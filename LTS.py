@@ -153,7 +153,7 @@ def monitor_loop():
 
 
 root = tk.Tk()
-root.title("LOTRO to Speech")
+root.title("LOTRO To Speech - Windows TTS Version")
 root.attributes("-alpha", 0.5)
 root.attributes("-topmost", True)
 root.state("zoomed")

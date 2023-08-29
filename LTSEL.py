@@ -190,7 +190,7 @@ def monitor_loop():
 
 
 root = tk.Tk()
-root.title("LOTRO to Speech - Elevenlab TTS")
+root.title("LOTRO To Speech - Elevenlab TTS Version")
 root.attributes("-alpha", 0.5)
 root.attributes("-topmost", True)
 root.state("zoomed")
