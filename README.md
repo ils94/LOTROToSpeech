@@ -3,7 +3,7 @@ Python program that uses Tesseract to perform OCR to detect text on your screen 
 
 # Installing and using
 
-First, you will need to install Tesseract which is a program that do OCR to convert text image to text string.
+First, you will need to install Tesseract which is a program that do OCR to convert image to text.
 
 You can download Tesseract from this link:
 
