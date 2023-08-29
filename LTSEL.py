@@ -12,6 +12,8 @@ import pyautogui
 import keyboard
 import re
 
+rect_color = "#ffcccb"
+
 pytesseract.pytesseract.tesseract_cmd = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
 
@@ -109,7 +111,7 @@ def on_drag(event):
         if rect:
             canvas.coords(rect, start_x, start_y, cur_x, cur_y)
         else:
-            rect = canvas.create_rectangle(start_x, start_y, cur_x, cur_y)
+            rect = canvas.create_rectangle(start_x, start_y, cur_x, cur_y, fill=rect_color)
 
 
 def on_release(event):
@@ -209,7 +211,7 @@ create_api_key_file()
 
 if start_x:
 
-    rect = canvas.create_rectangle(start_x, start_y, end_x, end_y)
+    rect = canvas.create_rectangle(start_x, start_y, end_x, end_y, fill=rect_color)
 
     if not monitoring:
         start_monitoring()
