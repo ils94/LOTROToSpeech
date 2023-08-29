@@ -9,7 +9,7 @@ You can download Tesseract from this link:
 
 https://github.com/UB-Mannheim/tesseract/wiki
 
-After installing Tesseract download LTS (LOTRO to Speech with Windows local TTS) or LTSEL (LOTRO to Speech Eleven Labs TTS)
+After installing Tesseract download LTS (LOTRO To Speech with Windows TTS) or LTSEL (LOTRO To Speech Eleven Labs TTS)
 
 LTS download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTS.zip
 
