@@ -12,6 +12,7 @@ import pyautogui
 import keyboard
 import re
 from playsound import playsound
+from plyer import notification
 
 rect_color = "#ffcccb"
 
@@ -157,6 +158,39 @@ def start_monitoring():
         monitor_thread.start()
 
 
+def start_tts_observer():
+    start_tts_thread = threading.Thread(target=start_tts)
+    start_tts_thread.setDaemon(True)
+    start_tts_thread.start()
+
+
+def start_tts():
+    global start
+
+    while True:
+        if keyboard.is_pressed("Ctrl"):
+            if keyboard.is_pressed("Alt"):
+                if start:
+                    start = False
+
+                    notification.notify(
+                        title="LOTRO To Speech",
+                        message="TTS is now OFF"
+                        # Specify the duration (in seconds) the notification should be displayed
+                    )
+
+                else:
+                    start = True
+
+                    notification.notify(
+                        title="LOTRO To Speech",
+                        message="TTS is now ON"
+                        # Specify the duration (in seconds) the notification should be displayed
+                    )
+
+        time.sleep(0.1)
+
+
 def is_image_on_screen():
     image_to_detect_1 = cv2.imread("quest.png")
     image_to_detect_2 = cv2.imread("nextObjective.png")
@@ -177,7 +211,7 @@ def is_image_on_screen():
 
 
 def monitor_loop():
-    global start_x, start_y, end_x, end_y
+    global start_x, start_y, end_x, end_y, start
 
     while True:
         try:
@@ -199,7 +233,7 @@ def monitor_loop():
 
                 print(cleaned_text)
 
-                if not keyboard.is_pressed("Ctrl"):
+                if start:
                     tts_engine(cleaned_text)
 
             time.sleep(0.5)
@@ -221,6 +255,7 @@ canvas.pack(fill=tk.BOTH, expand=True)
 
 rect = None
 monitoring = False
+start = False
 start_x, start_y, end_x, end_y = load_coordinates()
 
 canvas.bind("<ButtonPress-1>", on_press)
@@ -228,6 +263,8 @@ canvas.bind("<B1-Motion>", on_drag)
 canvas.bind("<ButtonRelease-1>", on_release)
 
 create_api_key_file()
+
+start_tts_observer()
 
 if start_x:
 
