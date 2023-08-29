@@ -94,24 +94,24 @@ def start_monitoring():
     monitor_thread.start()
 
 
-def start_stop_tts():
-    global start
+def enable_disable_tts():
+    global enable
 
-    if start:
-        start = False
+    if enable:
+        enable = False
 
         notification.notify(
             title="LOTRO To Speech",
-            message="TTS is now OFF"
+            message="TTS is now Disabled"
             # Specify the duration (in seconds) the notification should be displayed
         )
 
     else:
-        start = True
+        enable = True
 
         notification.notify(
             title="LOTRO To Speech",
-            message="TTS is now ON"
+            message="TTS is now Enabled"
             # Specify the duration (in seconds) the notification should be displayed
         )
 
@@ -176,7 +176,7 @@ def ocr_preview(event):
 
 
 def monitor_loop():
-    global start_x, start_y, end_x, end_y, start, text_ocr
+    global start_x, start_y, end_x, end_y, enable, text_ocr
 
     while True:
         try:
@@ -198,7 +198,7 @@ def monitor_loop():
 
                 text_ocr = cleaned_text
 
-                if start:
+                if enable:
                     tts_engine(cleaned_text)
 
             time.sleep(0.5)
@@ -220,7 +220,7 @@ canvas = tk.Canvas(root, cursor="cross")
 canvas.pack(fill=tk.BOTH, expand=True)
 
 rect = None
-start = False
+enable = False
 text_ocr = ""
 ocr_text_window = None
 ocr_text_widget = None
@@ -230,7 +230,7 @@ canvas.bind("<ButtonPress-1>", on_press)
 canvas.bind("<B1-Motion>", on_drag)
 canvas.bind("<ButtonRelease-1>", on_release)
 
-keyboard.add_hotkey("ctrl+alt", start_stop_tts)
+keyboard.add_hotkey("ctrl+alt", enable_disable_tts)
 
 if start_x:
     rect = canvas.create_rectangle(start_x, start_y, end_x, end_y, fill=rect_color)
