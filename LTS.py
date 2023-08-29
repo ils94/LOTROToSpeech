@@ -153,7 +153,8 @@ def monitor_loop():
 root = tk.Tk()
 root.title("LOTRO to Speech")
 root.attributes("-alpha", 0.5)
-root.state('zoomed')
+root.attributes("-topmost", True)
+root.state("zoomed")
 root.iconbitmap("lotrotospeech.ico")
 
 canvas = tk.Canvas(root, cursor="cross")
