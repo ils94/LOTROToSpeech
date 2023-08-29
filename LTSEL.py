@@ -5,12 +5,13 @@ import pytesseract
 import threading
 import os
 import time
-from elevenlabs import generate, play, set_api_key
+from elevenlabs import generate, set_api_key, save
 import cv2
 import numpy as np
 import pyautogui
 import keyboard
 import re
+from playsound import playsound
 
 rect_color = "#ffcccb"
 
@@ -34,7 +35,11 @@ def tts_engine(text):
                     model="eleven_monolingual_v1"
                 )
 
-                play(audio)
+                save(audio, "temp.mp3")
+
+                playsound("temp.mp3")
+
+                os.remove("temp.mp3")
             except Exception as e:
                 messagebox.showerror("ERROR", str(e).upper())
         else:
