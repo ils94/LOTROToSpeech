@@ -1,32 +1,69 @@
 import tkinter as tk
+from tkinter import messagebox
 from PIL import ImageGrab
 import pytesseract
 import threading
 import os
 import time
-import pyttsx3
+from elevenlabs import generate, play, set_api_key
 import cv2
-import re
 import numpy as np
 import pyautogui
 import keyboard
+import re
 
 pytesseract.pytesseract.tesseract_cmd = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
-engine = pyttsx3.init()
-voices = engine.getProperty('voices')
-engine.setProperty('rate', 150)
-
-for voice in voices:
-    if "EN-US" in voice.id:
-        engine.setProperty('voice', voice.id)
-        break
-
 
 def tts_engine(text):
+    key, voice = load_api_key()
+
     if text:
-        engine.say(text)
-        engine.runAndWait()
+        if key:
+            try:
+                set_api_key(key)
+
+                if not voice:
+                    voice = "Bella"
+
+                audio = generate(
+                    text=text,
+                    voice=voice,
+                    model="eleven_monolingual_v1"
+                )
+
+                play(audio)
+            except Exception as e:
+                messagebox.showerror("ERROR", str(e).upper())
+        else:
+            messagebox.showerror("ERROR", "NO API KEY.")
+            time.sleep(3)
+
+
+def create_api_key_file():
+    try:
+        with open("api_key.txt", "x") as file:
+            pass  # This creates an empty file if it doesn't exist
+    except FileExistsError:
+        pass  # File already exists, no need to create it
+
+
+def load_api_key():
+    key, voice = "", ""
+
+    try:
+        with open("api_key.txt", "r") as file:
+            lines = file.readlines()
+
+            if len(lines) > 0:
+                key = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
+
+            if len(lines) > 1:
+                voice = lines[1].strip()  # Use strip() to remove leading/trailing whitespace
+
+            return key, voice
+    except FileNotFoundError:
+        return "", ""
 
 
 def save_coordinates(cor_x, cor_y, e_x, e_y):
@@ -151,7 +188,7 @@ def monitor_loop():
 
 
 root = tk.Tk()
-root.title("LOTRO to Speech")
+root.title("LOTRO to Speech - Elevenlab TTS")
 root.attributes("-alpha", 0.5)
 root.state('zoomed')
 root.iconbitmap("lotrotospeech.ico")
@@ -166,6 +203,8 @@ start_x, start_y, end_x, end_y = load_coordinates()
 canvas.bind("<ButtonPress-1>", on_press)
 canvas.bind("<B1-Motion>", on_drag)
 canvas.bind("<ButtonRelease-1>", on_release)
+
+create_api_key_file()
 
 if start_x:
 
