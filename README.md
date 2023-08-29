@@ -19,7 +19,7 @@ unzip the version you downloaded, and run either LTS.exe or LTSEL.exe inside the
 
 # How to use
 
-**LTS** (LOTRO to Speech Windows TTS version)
+**LTS** (LOTRO To Speech - Windows TTS version)
 
 Open your game:
 
@@ -39,7 +39,7 @@ After you are done setting everything, you can minimize it (do not close LOTRO t
 
 ----
 
-**LTSEL** (LOTRO to Speech Elevenlab TTS version)
+**LTSEL** (LOTRO To Speech - Elevenlab TTS version)
 
 You will do the same setup as LTS, but, inside LTSEL folder, you will find an api_key.text (if it is not there, you can create api_key.txt file inside the root folder)
 
