@@ -19,32 +19,47 @@ pytesseract.pytesseract.tesseract_cmd = fr'C:\Users\{os.getlogin()}\AppData\Loca
 
 
 def tts_engine(text):
+    if not os.path.exists("audios"):
+        # If it doesn't exist, create it
+        os.makedirs("audios")
+
+    words = text.split()
+
+    # Take the first 5 words
+    first_5_words = " ".join(words[:5]).lower()
+
+    first_5_words = re.sub(r'[^a-zA-Z0-9 ]', '', first_5_words)
+
+    first_5_words = first_5_words.replace(" ", "_")
+
     key, voice = load_api_key()
 
-    if text:
-        if key:
-            try:
-                set_api_key(key)
+    if os.path.exists("audios/" + first_5_words + ".mp3"):
+        playsound("audios/" + first_5_words + ".mp3")
+    else:
+        if text:
+            if key:
+                try:
+                    set_api_key(key)
 
-                if not voice:
-                    voice = "Bella"
+                    if not voice:
+                        voice = "Bella"
 
-                audio = generate(
-                    text=text,
-                    voice=voice,
-                    model="eleven_monolingual_v1"
-                )
+                    audio = generate(
+                        text=text,
+                        voice=voice,
+                        model="eleven_monolingual_v1"
+                    )
 
-                save(audio, "temp.mp3")
+                    save(audio, "audios/" + first_5_words + ".mp3")
 
-                playsound("temp.mp3")
+                    playsound("audios/" + first_5_words + ".mp3")
 
-                os.remove("temp.mp3")
-            except Exception as e:
-                messagebox.showerror("ERROR", str(e).upper())
-        else:
-            messagebox.showerror("ERROR", "NO API KEY.")
-            time.sleep(3)
+                except Exception as e:
+                    messagebox.showerror("ERROR", str(e).upper())
+            else:
+                messagebox.showerror("ERROR", "NO API KEY.")
+                time.sleep(3)
 
 
 def create_api_key_file():
