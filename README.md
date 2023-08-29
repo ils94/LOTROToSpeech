@@ -1,4 +1,4 @@
-# LOTROToSpeech
+# LOTRO To Speech
 Python program that uses Tesseract to do OCR to get text on your screen and convert to string, then, using Windows built in EN-US TTS to voice over the quest text.
 
 # Installing
