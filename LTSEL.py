@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
+import sys
+from tkinter import messagebox, Menu
 from PIL import ImageGrab
 import pytesseract
 import threading
@@ -16,10 +17,59 @@ from plyer import notification
 
 rect_color = "#ffcccb"
 
-pytesseract.pytesseract.tesseract_cmd = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+app_data_path = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+
+program_files_path = fr'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+
+def look_for_tesseract():
+    if os.path.exists(app_data_path):
+        pytesseract.pytesseract.tesseract_cmd = app_data_path
+    elif os.path.exists(program_files_path):
+        pytesseract.pytesseract.tesseract_cmd = program_files_path
+    else:
+        path = load_tesseract_path()
+
+        if path:
+            if r"\tesseract.exe" not in path:
+                pytesseract.pytesseract.tesseract_cmd = load_tesseract_path() + r"\tesseract.exe"
+            else:
+                pytesseract.pytesseract.tesseract_cmd = load_tesseract_path()
+        else:
+            messagebox.showerror("Error", "Cannot find Tesseract. Download Tesseract from LOTRO To Speech "
+                                          "Github page and install it. If you have already installed it, but installed "
+                                          "in another path, go to LTSET root folder, and paste the path to your "
+                                          "Tesseract into tesseract_path.txt.")
+
+            sys.exit()
+
+
+def create_tesseract_path_file():
+    try:
+        with open("tesseract_path.txt", "x") as file:
+            pass  # This creates an empty file if it doesn't exist
+    except FileExistsError:
+        pass  # File already exists, no need to create it
+
+
+def load_tesseract_path():
+    path = ""
+
+    try:
+        with open("tesseract_path.txt", "r") as file:
+            lines = file.readlines()
+
+            if len(lines) > 0:
+                path = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
+
+            return path
+    except FileNotFoundError:
+        return ""
 
 
 def tts_engine(text):
+    global already_talked
+
     if not os.path.exists("audios"):
         # If it doesn't exist, create it
         os.makedirs("audios")
@@ -34,6 +84,9 @@ def tts_engine(text):
     audio_file = "audios/" + first_5_words + ".mp3"
 
     key, voice = load_api_key()
+
+    if already_talked:
+        return
 
     if os.path.exists(audio_file):
         playsound(audio_file)
@@ -57,10 +110,12 @@ def tts_engine(text):
                     playsound(audio_file)
 
                 except Exception as e:
-                    messagebox.showerror("ERROR", str(e).upper())
+                    messagebox.showerror("Error", str(e))
             else:
-                messagebox.showerror("ERROR", "NO API KEY.")
+                messagebox.showerror("Error", "No API Key.")
                 time.sleep(3)
+
+    already_talked = True
 
 
 def create_api_key_file():
@@ -174,6 +229,8 @@ def enable_disable_tts():
 
 
 def is_image_on_screen():
+    global already_talked
+
     image_to_detect_1 = cv2.imread("quest.png")
     image_to_detect_2 = cv2.imread("nextObjective.png")
 
@@ -190,6 +247,8 @@ def is_image_on_screen():
 
     if max_val_1 > 0.7 or max_val_2 > 0.7:
         return True
+    else:
+        already_talked = False
 
 
 def center_window(window, min_width, min_height):
@@ -208,6 +267,13 @@ def center_window(window, min_width, min_height):
 def ocr_preview(event):
     global ocr_text_window, ocr_text_widget, text_ocr
 
+    def get_ocr():
+        # Clear existing text
+        ocr_text_widget.config(state=tk.NORMAL)
+        ocr_text_widget.delete(1.0, tk.END)
+        ocr_text_widget.insert(tk.END, text_ocr)
+        ocr_text_widget.config(state=tk.DISABLED)
+
     if ocr_text_window is None or not ocr_text_window.winfo_exists():
         ocr_text_window = tk.Toplevel(root)
         ocr_text_window.title("OCR Result")
@@ -218,6 +284,16 @@ def ocr_preview(event):
         # Create and pack the Text widget
         ocr_text_widget = tk.Text(ocr_text_window, wrap=tk.WORD)
         ocr_text_widget.pack(fill=tk.BOTH, expand=True)
+
+        menu_bar = Menu(ocr_text_window)
+
+        menu = Menu(menu_bar, tearoff=0)
+
+        menu.add_command(label="Refresh OCR", command=get_ocr)
+
+        menu_bar.add_cascade(label="Menu", menu=menu)
+
+        ocr_text_window.config(menu=menu_bar)
 
         # Center the window on the screen with a minimum size
         center_window(ocr_text_window, 500, 500)  # Adjust the minimum size as needed
@@ -279,6 +355,7 @@ canvas.pack(fill=tk.BOTH, expand=True)
 rect = None
 enable = False
 text_ocr = ""
+already_talked = False
 ocr_text_window = None
 ocr_text_widget = None
 start_x, start_y, end_x, end_y = load_coordinates()
@@ -291,6 +368,10 @@ keyboard.add_hotkey("ctrl+alt", enable_disable_tts)
 
 if start_x:
     rect = canvas.create_rectangle(start_x, start_y, end_x, end_y, fill=rect_color)
+
+create_tesseract_path_file()
+
+look_for_tesseract()
 
 create_api_key_file()
 
