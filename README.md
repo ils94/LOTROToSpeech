@@ -39,8 +39,8 @@ After you are done setting everything, you can minimize it (do not close LOTRO T
 
 You can change the voices for LTSET by opening the file (or creating the file) named "voice.txt" inside the root folder, and pasting in the first line one of the voices from those files:
 
-[enter link description here](https://github.com/ils94/LOTROToSpeech/blob/master/Languages%20for%20LTSET/Edge-TTS%20Male%20EN-US%20Voices.txt)
-[enter link description here](https://github.com/ils94/LOTROToSpeech/blob/master/Languages%20for%20LTSET/Edge-TTS%20Female%20EN-US%20Voices.txt)
+[Edge-TTS Male EN-US Voices](https://github.com/ils94/LOTROToSpeech/blob/master/Languages%20for%20LTSET/Edge-TTS%20Male%20EN-US%20Voices.txt)
+[Edge-TTS Female EN-US Voices](https://github.com/ils94/LOTROToSpeech/blob/master/Languages%20for%20LTSET/Edge-TTS%20Female%20EN-US%20Voices.txt)
 
 Example:
 
