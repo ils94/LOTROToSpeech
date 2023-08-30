@@ -27,16 +27,16 @@ def tts_engine(text):
     words = text.split()
 
     # Take the first 5 words
-    first_5_words = " ".join(words[:5]).lower()
+    first_5_words = "".join(words[:5]).lower()
 
-    first_5_words = re.sub(r'[^a-zA-Z0-9 ]', '', first_5_words)
+    first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
 
-    first_5_words = first_5_words.replace(" ", "_")
+    audio_file = "audios/" + first_5_words + ".mp3"
 
     key, voice = load_api_key()
 
-    if os.path.exists("audios/" + first_5_words + ".mp3"):
-        playsound("audios/" + first_5_words + ".mp3")
+    if os.path.exists(audio_file):
+        playsound(audio_file)
     else:
         if text:
             if key:
@@ -52,9 +52,9 @@ def tts_engine(text):
                         model="eleven_monolingual_v1"
                     )
 
-                    save(audio, "audios/" + first_5_words + ".mp3")
+                    save(audio, audio_file)
 
-                    playsound("audios/" + first_5_words + ".mp3")
+                    playsound(audio_file)
 
                 except Exception as e:
                     messagebox.showerror("ERROR", str(e).upper())
@@ -251,12 +251,12 @@ def monitor_loop():
 
                 text_without_double_spaces = re.sub(r'\s+', ' ', text)
 
-                cleaned_text = re.sub(r'[^\w\s.!?;,\']', '', text_without_double_spaces)
+                cleaned_text = re.sub(r'[^a-zA-Z0-9!?.;,:\-\'\" ]', '', text_without_double_spaces)
 
                 text_ocr = cleaned_text
 
                 if enable:
-                    tts_engine(cleaned_text)
+                    tts_engine(text_ocr)
 
             time.sleep(0.5)
         except Exception as e:

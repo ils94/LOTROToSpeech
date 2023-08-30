@@ -194,12 +194,12 @@ def monitor_loop():
 
                 text_without_double_spaces = re.sub(r'\s+', ' ', text)
 
-                cleaned_text = re.sub(r'[^\w\s.!?;,\']', '', text_without_double_spaces)
+                cleaned_text = re.sub(r'[^a-zA-Z0-9!?.;,:\-\'\" ]', '', text_without_double_spaces)
 
                 text_ocr = cleaned_text
 
                 if enable:
-                    tts_engine(cleaned_text)
+                    tts_engine(text_ocr)
 
             time.sleep(0.5)
         except Exception as e:
