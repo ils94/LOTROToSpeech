@@ -13,7 +13,7 @@ After installing Tesseract download LTSET (LOTRO To Speech - Edge-TTS Version) o
 
 LTS download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTSET.zip
 
-LTSEL download link: [coming soon](https://github.com/ils94/LOTROToSpeech/releases/download/LTSEL-Release/LTSEL.zip)
+LTSEL download link: https://github.com/ils94/LOTROToSpeech/releases/download/LTSEL-Release/LTSEL.zip
 
 unzip the version you downloaded, and run either LTSET.exe or LTSEL.exe inside the root folder
 
