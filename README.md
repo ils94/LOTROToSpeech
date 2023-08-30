@@ -1,9 +1,19 @@
 # LOTRO To Speech
 Python program that uses Tesseract to perform OCR to detect text on your screen and convert it to string to be used on voice over A.Is
 
+# Differences between LTSET and LTSEL
+
+**LTSET** (LOTRO To Speech - Edge-TTS Version)
+
+This version of LOTRO To Speech uses Edge-TTS (Microsoft Edge TTS) engine to generate audio files, this is one of the best and 100% free (for non comercial uses) A.I TTS available.
+
+**LTSEL** (LOTRO To Speech - Elevenlab TTS Version)
+
+If you are willing to fork some money for the best A.I audio generation in the market, this version is for you. It uses Elevenlab engine to generate audio files. More information below.
+
 # Installing and using
 
-First, you will need to install Tesseract which is a program that do OCR to convert image to text.
+First, you will need to install Tesseract, which is a program that performs OCR to convert image to text.
 
 You can download Tesseract from this link:
 
@@ -15,7 +25,7 @@ LTSET download link: https://github.com/ils94/LOTROToSpeech/releases/download/LT
 
 LTSEL download link: https://github.com/ils94/LOTROToSpeech/releases/download/LTSEL-Release/LTSEL.zip (outdated)
 
-unzip the version you downloaded, and run either LTSET.exe or LTSEL.exe inside the root folder
+unzip the version you downloaded, and run either LTSET.exe or LTSEL.exe inside the program root folder.
 
 # How to use
 
@@ -29,15 +39,15 @@ Now open LOTRO To Speech overlay and hold Ctrl + Left Mouse Button to drag a rec
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial2.PNG?raw=true)
 
-While in the LOTRO To Speech overlay, you can press Ctrl + A to open the OCR Result window, and test if the Quest Text is being captured well. Once you open the OCR Result Window, click out of it so the window loses focus, then, you can spam Ctrl + A to update it's text with the OCR Result. The OCR is performed every second, so give it time and keep adjusting the Rectangle around the text:
+While in the LOTRO To Speech overlay, you can press Ctrl + A to open the OCR Result Window, and test if the Quest Text is being captured well. You can use the Menu - Refresh OCR button (picture outdated) to refresh the OCR content in real time. If the OCR Result Window gets behind the LOTRO To Speech overlay, just press Ctrl + A again to bring it back to the front.
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial3.PNG?raw=true)
 
-Tip: Resize the Quest Window as much as you can and leave the Quest Window to  the right of your screen, because if you leave it to your left, it may read your chat window.
+**Tip**: Resize the Quest Window as much as you can, and leave the Quest Window to  the right of your screen, because if you leave it to your left, it may read your chat window.
 
 After you are done setting everything, you can minimize it (do not close LOTRO To Speech) and press "Ctrl+Alt" to enable the TTS.
 
-You can change the voices for LTSET by opening the file (or creating the file) named "voice.txt" inside the root folder, and pasting in the first line one of the voices from those files:
+You can change the voices for LTSET by opening the file (or creating the file) named "voice.txt" inside the program root folder, and paste in the first line one of the voices from those files:
 
 [Edge-TTS Male EN-US Voices](https://github.com/ils94/LOTROToSpeech/blob/master/Languages%20for%20LTSET/Edge-TTS%20Male%20EN-US%20Voices.txt)
 
@@ -53,7 +63,7 @@ Leaving this file empty, will set "en-GB-RyanNeural" as default voice
 
 **LTSEL** (LOTRO To Speech - Elevenlab TTS Version)
 
-You will do the same setup as LTSET, but, inside LTSEL folder, you will find an api_key.text (if it is not there, you can create api_key.txt file inside the root folder)
+You will do the same setup as LTSET, but, inside LTSEL folder, you will find an api_key.text (if it is not there, you can create api_key.txt file inside the program root folder).
 
 Open api_key.txt file and in the first line paste your API key from your Elevenlab account
 
