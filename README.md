@@ -25,17 +25,28 @@ Open your game and look for a NPC with a quest available so you can use it as ba
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial1.PNG?raw=true)
 
-Now open LOTRO To Speech overlay:
+Now open LOTRO To Speech overlay and hold Ctrl + Left Mouse Button to drag a rectangle around the text of the quest:
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial2.PNG?raw=true)
 
-Now hold CTRL and Mouse left button to drag a rectangle around the text of the quest:
+While in the LOTRO To Speech overlay, you can press Ctrl + A to open the OCR Result window, and test if the Quest Text is being captured well:
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial3.PNG?raw=true)
 
 Tip: Resize the Quest Window as much as you can and leave the Quest Window to  the right of your screen, because if you leave it to your left, it may read your chat window.
 
-After you are done setting everything, you can minimize it (do not close LOTRO To Speech)
+After you are done setting everything, you can minimize it (do not close LOTRO To Speech) and press "Ctrl+Alt" to enable the TTS.
+
+You can change the voices for LTSET by opening the file (or creating the file) named "voice.txt" inside the root folder, and pasting in the first line one of the voices from those files:
+
+[enter link description here](https://github.com/ils94/LOTROToSpeech/blob/master/Languages%20for%20LTSET/Edge-TTS%20Male%20EN-US%20Voices.txt)
+[enter link description here](https://github.com/ils94/LOTROToSpeech/blob/master/Languages%20for%20LTSET/Edge-TTS%20Female%20EN-US%20Voices.txt)
+
+Example:
+
+![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial5.PNG?raw=true)
+
+Leaving this file empty, will set "en-GB-RyanNeural" as default voice
 
 ----
 
