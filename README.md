@@ -9,17 +9,17 @@ You can download Tesseract from this link:
 
 https://github.com/UB-Mannheim/tesseract/wiki
 
-After installing Tesseract download LTS (LOTRO To Speech - Windows TTS Version) or LTSEL (LOTRO To Speech - Eleven Labs TTS Version)
+After installing Tesseract download LTSET (LOTRO To Speech - Edge-TTS Version) or LTSEL (LOTRO To Speech - Eleven Labs TTS Version)
 
-LTS download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTS.zip
+LTS download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTSET.zip
 
-LTSEL download link: coming soon
+LTSEL download link: [coming soon](https://github.com/ils94/LOTROToSpeech/releases/download/LTSEL-Release/LTSEL.zip)
 
-unzip the version you downloaded, and run either LTS.exe or LTSEL.exe inside the root folder
+unzip the version you downloaded, and run either LTSET.exe or LTSEL.exe inside the root folder
 
 # How to use
 
-**LTS** (LOTRO To Speech - Windows TTS Version)
+**LTSET** (LOTRO To Speech - Edge-TTS Version)
 
 Open your game:
 
@@ -41,7 +41,7 @@ After you are done setting everything, you can minimize it (do not close LOTRO T
 
 **LTSEL** (LOTRO To Speech - Elevenlab TTS Version)
 
-You will do the same setup as LTS, but, inside LTSEL folder, you will find an api_key.text (if it is not there, you can create api_key.txt file inside the root folder)
+You will do the same setup as LTSET, but, inside LTSEL folder, you will find an api_key.text (if it is not there, you can create api_key.txt file inside the root folder)
 
 Open api_key.txt file and in the first line paste your API key from your Elevenlab account
 
