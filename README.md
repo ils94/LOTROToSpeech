@@ -9,6 +9,8 @@ You can download Tesseract from this link:
 
 https://github.com/UB-Mannheim/tesseract/wiki
 
+You want to install Tesseract in this path on your computer: C:\Users\youruser\AppData\Local\Programs\Tesseract-OCR\tesseract.exe
+
 After installing Tesseract download LTSET (LOTRO To Speech - Edge-TTS Version) or LTSEL (LOTRO To Speech - Eleven Labs TTS Version)
 
 LTSET download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTSET.zip
@@ -29,7 +31,7 @@ Now open LOTRO To Speech overlay and hold Ctrl + Left Mouse Button to drag a rec
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial2.PNG?raw=true)
 
-While in the LOTRO To Speech overlay, you can press Ctrl + A to open the OCR Result window, and test if the Quest Text is being captured well:
+While in the LOTRO To Speech overlay, you can press Ctrl + A to open the OCR Result window, and test if the Quest Text is being captured well. Once you open the OCR Result Window, click out of it so the window loses focus, then, you can spam Ctrl + A to update it's text with the OCR Result. The OCR is performed every second, so give it time and keep adjusting the Rectangle around the text:
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial3.PNG?raw=true)
 
