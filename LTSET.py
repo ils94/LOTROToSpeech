@@ -3,33 +3,73 @@ from PIL import ImageGrab
 import pytesseract
 import threading
 import os
-import time
-import pyttsx3
 import cv2
 import re
 import numpy as np
 import pyautogui
 import keyboard
 from plyer import notification
+from playsound import playsound
+import edge_tts
+import asyncio
 
 rect_color = "#ffcccb"
 
 pytesseract.pytesseract.tesseract_cmd = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
-engine = pyttsx3.init()
-voices = engine.getProperty('voices')
-engine.setProperty('rate', 150)
 
-for voice in voices:
-    if "EN-US" in voice.id:
-        engine.setProperty('voice', voice.id)
-        break
+async def tts_engine(text) -> None:
+    if not os.path.exists("audios"):
+        # If it doesn't exist, create it
+        os.makedirs("audios")
+
+    words = text.split()
+
+    # Take the first 5 words
+    first_5_words = "".join(words[:5]).lower()
+
+    first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
+
+    audio_file = "audios/" + first_5_words + ".mp3"
+
+    voice = load_voice_file()
+
+    if os.path.exists(audio_file):
+        playsound(audio_file)
+    else:
+        if text:
+
+            if not voice:
+                voice = "en-GB-RyanNeural"
+
+            communicate = edge_tts.Communicate(text, voice)
+
+            await communicate.save(audio_file)
+
+            playsound(audio_file)
 
 
-def tts_engine(text):
-    if text:
-        engine.say(text)
-        engine.runAndWait()
+def create_voice_file():
+    try:
+        with open("voice.txt", "x") as file:
+            pass  # This creates an empty file if it doesn't exist
+    except FileExistsError:
+        pass  # File already exists, no need to create it
+
+
+def load_voice_file():
+    voice = ""
+
+    try:
+        with open("voice.txt", "r") as file:
+            lines = file.readlines()
+
+            if len(lines) > 0:
+                voice = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
+
+            return voice
+    except FileNotFoundError:
+        return ""
 
 
 def save_coordinates(cor_x, cor_y, e_x, e_y):
@@ -92,6 +132,12 @@ def start_monitoring():
     monitor_thread = threading.Thread(target=monitor_loop)
     monitor_thread.setDaemon(True)
     monitor_thread.start()
+
+
+def monitor_loop():
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(monitor_loop_async())
 
 
 def enable_disable_tts():
@@ -175,7 +221,7 @@ def ocr_preview(event):
     ocr_text_widget.config(state=tk.DISABLED)
 
 
-def monitor_loop():
+async def monitor_loop_async():
     global start_x, start_y, end_x, end_y, enable, text_ocr
 
     while True:
@@ -199,17 +245,17 @@ def monitor_loop():
                 text_ocr = cleaned_text
 
                 if enable:
-                    tts_engine(text_ocr)
+                    await tts_engine(text_ocr)
 
-            time.sleep(0.5)
+            await asyncio.sleep(0.5)
         except Exception as e:
             print(e)
-            time.sleep(3)
+            await asyncio.sleep(3)
             continue
 
 
 root = tk.Tk()
-root.title("LOTRO To Speech - Windows TTS Version")
+root.title("LOTRO To Speech - Edge-TTS Version")
 root.attributes("-alpha", 0.5)
 root.attributes("-topmost", True)
 root.state("zoomed")
@@ -231,6 +277,8 @@ canvas.bind("<B1-Motion>", on_drag)
 canvas.bind("<ButtonRelease-1>", on_release)
 
 keyboard.add_hotkey("ctrl+alt", enable_disable_tts)
+
+create_voice_file()
 
 if start_x:
     rect = canvas.create_rectangle(start_x, start_y, end_x, end_y, fill=rect_color)
