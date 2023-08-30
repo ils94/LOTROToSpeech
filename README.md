@@ -21,7 +21,7 @@ unzip the version you downloaded, and run either LTSET.exe or LTSEL.exe inside t
 
 **LTSET** (LOTRO To Speech - Edge-TTS Version)
 
-Open your game:
+Open your game and look for a NPC with a quest available so you can use it as base:
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial1.PNG?raw=true)
 
