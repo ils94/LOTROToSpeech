@@ -11,7 +11,7 @@ https://github.com/UB-Mannheim/tesseract/wiki
 
 After installing Tesseract download LTSET (LOTRO To Speech - Edge-TTS Version) or LTSEL (LOTRO To Speech - Eleven Labs TTS Version)
 
-LTS download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTSET.zip
+LTSET download link: https://github.com/ils94/LOTROToSpeech/releases/download/release/LTSET.zip
 
 LTSEL download link: https://github.com/ils94/LOTROToSpeech/releases/download/LTSEL-Release/LTSEL.zip
 
