@@ -12,7 +12,7 @@ import numpy as np
 import pyautogui
 import keyboard
 import re
-from playsound import playsound
+import pygame
 from plyer import notification
 
 rect_color = "#ffcccb"
@@ -20,6 +20,11 @@ rect_color = "#ffcccb"
 app_data_path = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
 program_files_path = fr'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+# Initialize Pygame
+pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.stop()  # Stop the initial Pygame playback
 
 
 def look_for_tesseract():
@@ -67,6 +72,23 @@ def load_tesseract_path():
         return ""
 
 
+def stop_audio():
+    pygame.mixer.music.stop()
+
+    pygame.mixer.music.unload()
+
+
+def play_audio(audio):
+    pygame.mixer.music.load(audio)
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)  # Adjust the playback speed as needed
+
+    # Unload the audio to free up memory
+    pygame.mixer.music.unload()
+
+
 def tts_engine(text):
     global already_talked
 
@@ -89,7 +111,7 @@ def tts_engine(text):
         return
 
     if os.path.exists(audio_file):
-        playsound(audio_file)
+        play_audio(audio_file)
     else:
         if text:
             if key:
@@ -107,7 +129,7 @@ def tts_engine(text):
 
                     save(audio, audio_file)
 
-                    playsound(audio_file)
+                    play_audio(audio_file)
 
                 except Exception as e:
                     messagebox.showerror("Error", str(e))
@@ -365,6 +387,8 @@ canvas.bind("<B1-Motion>", on_drag)
 canvas.bind("<ButtonRelease-1>", on_release)
 
 keyboard.add_hotkey("ctrl+alt", enable_disable_tts)
+
+keyboard.add_hotkey("ctrl+shift", stop_audio)
 
 if start_x:
     rect = canvas.create_rectangle(start_x, start_y, end_x, end_y, fill=rect_color)

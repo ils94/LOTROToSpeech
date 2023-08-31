@@ -11,15 +11,20 @@ import numpy as np
 import pyautogui
 import keyboard
 from plyer import notification
-from playsound import playsound
 import edge_tts
 import asyncio
+import pygame
 
 rect_color = "#ffcccb"
 
 app_data_path = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 
 program_files_path = fr'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+# Initialize Pygame
+pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.stop()  # Stop the initial Pygame playback
 
 
 def look_for_tesseract():
@@ -67,20 +72,32 @@ def load_tesseract_path():
         return ""
 
 
+def stop_audio():
+    pygame.mixer.music.stop()
+
+    pygame.mixer.music.unload()
+
+
+def play_audio(audio):
+    pygame.mixer.music.load(audio)
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)  # Adjust the playback speed as needed
+
+    # Unload the audio to free up memory
+    pygame.mixer.music.unload()
+
+
 async def tts_engine(text) -> None:
     global already_talked
 
     if not os.path.exists("audios"):
-        # If it doesn't exist, create it
         os.makedirs("audios")
 
     words = text.split()
-
-    # Take the first 5 words
     first_5_words = "".join(words[:5]).lower()
-
     first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
-
     audio_file = "audios/" + first_5_words + ".mp3"
 
     voice = load_voice_file()
@@ -89,10 +106,9 @@ async def tts_engine(text) -> None:
         return
 
     if os.path.exists(audio_file):
-        playsound(audio_file)
+        play_audio(audio_file)
     else:
         if text:
-
             if not voice:
                 voice = "en-GB-RyanNeural"
 
@@ -100,7 +116,7 @@ async def tts_engine(text) -> None:
 
             await communicate.save(audio_file)
 
-            playsound(audio_file)
+            play_audio(audio_file)
 
     already_talked = True
 
@@ -356,15 +372,14 @@ canvas.bind("<ButtonRelease-1>", on_release)
 
 keyboard.add_hotkey("ctrl+alt", enable_disable_tts)
 
+keyboard.add_hotkey("ctrl+shift", stop_audio)
+
 if start_x:
     rect = canvas.create_rectangle(start_x, start_y, end_x, end_y, fill=rect_color)
 
 create_voice_file()
-
 create_tesseract_path_file()
-
 look_for_tesseract()
-
 start_monitoring()
 
 root.mainloop()
