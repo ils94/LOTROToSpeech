@@ -12,18 +12,18 @@ program_files_path = fr'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def create_tesseract_path_file():
 
-    if not os.path.exists(globalVariables.tesseract_custom_path):
-        os.makedirs(globalVariables.tesseract_custom_path)
+    if not os.path.exists(globalVariables.config_path):
+        os.makedirs(globalVariables.config_path)
 
     try:
-        with open(globalVariables.tesseract_custom_path + r"/tesseract_path.txt", "x") as file:
+        with open(globalVariables.config_path + r"/tesseract_path.txt", "x") as file:
             pass  # This creates an empty file if it doesn't exist
     except FileExistsError:
         pass  # File already exists, no need to create it
 
 
 def load_tesseract_path():
-    path = globalVariables.tesseract_custom_path
+    path = globalVariables.config_path
 
     try:
         with open("tesseract_path.txt", "r") as file:

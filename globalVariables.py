@@ -11,7 +11,4 @@ end_y = None
 text_ocr = ""
 
 audio_path_string = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Audios"
-tesseract_custom_path = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Configs"
-voices_path = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Configs"
-coordinates_path = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Configs"
-api_file_path = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Configs"
+config_path = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Configs"

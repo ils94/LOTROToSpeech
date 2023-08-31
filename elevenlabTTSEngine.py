@@ -76,11 +76,11 @@ def tts_engine(text):
 
 
 def create_api_key_file():
-    if not os.path.exists(globalVariables.api_file_path):
-        os.makedirs(globalVariables.api_file_path)
+    if not os.path.exists(globalVariables.config_path):
+        os.makedirs(globalVariables.config_path)
 
     try:
-        with open(globalVariables.api_file_path + r"/api_key.txt", "x") as file:
+        with open(globalVariables.config_path + r"/api_key.txt", "x") as file:
             pass  # This creates an empty file if it doesn't exist
     except FileExistsError:
         pass  # File already exists, no need to create it
@@ -90,7 +90,7 @@ def load_api_key():
     key, voice = "", ""
 
     try:
-        with open(globalVariables.api_file_path + r"/api_key.txt", "r") as file:
+        with open(globalVariables.config_path + r"/api_key.txt", "r") as file:
             lines = file.readlines()
 
             if len(lines) > 0:

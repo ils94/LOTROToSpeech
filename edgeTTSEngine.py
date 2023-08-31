@@ -56,11 +56,11 @@ async def tts_engine(text) -> None:
 
 def create_voice_file():
 
-    if not os.path.exists(globalVariables.voices_path):
-        os.makedirs(globalVariables.voices_path)
+    if not os.path.exists(globalVariables.config_path):
+        os.makedirs(globalVariables.config_path)
 
     try:
-        with open(globalVariables.voices_path + r"/voice.txt", "x") as file:
+        with open(globalVariables.config_path + r"/voice.txt", "x") as file:
             pass  # This creates an empty file if it doesn't exist
     except FileExistsError:
         pass  # File already exists, no need to create it
@@ -70,7 +70,7 @@ def load_voice_file():
     voice = ""
 
     try:
-        with open(globalVariables.voices_path + r"/voice.txt", "r") as file:
+        with open(globalVariables.config_path + r"/voice.txt", "r") as file:
             lines = file.readlines()
 
             if len(lines) > 0:
