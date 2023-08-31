@@ -1,25 +1,18 @@
-import sys
 import tkinter as tk
-from tkinter import Menu, messagebox
-from PIL import ImageGrab
-import pytesseract
-import threading
-import os
-import cv2
-import re
-import numpy as np
-import pyautogui
+from tkinter import Menu
 import keyboard
-from plyer import notification
-import edge_tts
+import edgeTTSEngine
 import asyncio
 import pygame
 
+import startThreads
+import globalVariables
+import screenCoordinatesFiles
+import lookForTesseract
+import enableDisableTTS
+import OCRDetectionAndCleanup
+
 rect_color = "#ffcccb"
-
-app_data_path = fr'C:\Users\{os.getlogin()}\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
-
-program_files_path = fr'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Initialize Pygame
 pygame.init()
@@ -27,151 +20,12 @@ pygame.mixer.init()
 pygame.mixer.music.stop()  # Stop the initial Pygame playback
 
 
-def look_for_tesseract():
-    if os.path.exists(app_data_path):
-        pytesseract.pytesseract.tesseract_cmd = app_data_path
-    elif os.path.exists(program_files_path):
-        pytesseract.pytesseract.tesseract_cmd = program_files_path
-    else:
-        path = load_tesseract_path()
-
-        if path:
-            if r"\tesseract.exe" not in path:
-                pytesseract.pytesseract.tesseract_cmd = load_tesseract_path() + r"\tesseract.exe"
-            else:
-                pytesseract.pytesseract.tesseract_cmd = load_tesseract_path()
-        else:
-            messagebox.showerror("Error", "Cannot find Tesseract. Download Tesseract from LOTRO To Speech "
-                                          "Github page and install it. If you have already installed it, but installed "
-                                          "in another path, go to LTSET root folder, and paste the path to your "
-                                          "Tesseract into tesseract_path.txt.")
-
-            sys.exit()
-
-
-def create_tesseract_path_file():
-    try:
-        with open("tesseract_path.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
-    except FileExistsError:
-        pass  # File already exists, no need to create it
-
-
-def load_tesseract_path():
-    path = ""
-
-    try:
-        with open("tesseract_path.txt", "r") as file:
-            lines = file.readlines()
-
-            if len(lines) > 0:
-                path = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
-
-            return path
-    except FileNotFoundError:
-        return ""
-
-
-def stop_audio():
-    pygame.mixer.music.stop()
-
-    pygame.mixer.music.unload()
-
-
-def play_audio(audio):
-    pygame.mixer.music.load(audio)
-    pygame.mixer.music.play()
-
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)  # Adjust the playback speed as needed
-
-    # Unload the audio to free up memory
-    pygame.mixer.music.unload()
-
-
-async def tts_engine(text) -> None:
-    global already_talked
-
-    if not os.path.exists("audios"):
-        os.makedirs("audios")
-
-    words = text.split()
-    first_5_words = "".join(words[:5]).lower()
-    first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
-    audio_file = "audios/" + first_5_words + ".mp3"
-
-    voice = load_voice_file()
-
-    if already_talked:
-        return
-
-    if os.path.exists(audio_file):
-        play_audio(audio_file)
-    else:
-        if text:
-            if not voice:
-                voice = "en-GB-RyanNeural"
-
-            communicate = edge_tts.Communicate(text, voice)
-
-            await communicate.save(audio_file)
-
-            play_audio(audio_file)
-
-    already_talked = True
-
-
-def create_voice_file():
-    try:
-        with open("voice.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
-    except FileExistsError:
-        pass  # File already exists, no need to create it
-
-
-def load_voice_file():
-    voice = ""
-
-    try:
-        with open("voice.txt", "r") as file:
-            lines = file.readlines()
-
-            if len(lines) > 0:
-                voice = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
-
-            return voice
-    except FileNotFoundError:
-        return ""
-
-
-def save_coordinates(cor_x, cor_y, e_x, e_y):
-    with open("coordinates.txt", "w") as file:
-        file.write(f"Start X: {cor_x}\n")
-        file.write(f"Start Y: {cor_y}\n")
-        file.write(f"End X: {e_x}\n")
-        file.write(f"End Y: {e_y}\n")
-
-
-def load_coordinates():
-    try:
-        with open("coordinates.txt", "r") as file:
-            lines = file.readlines()
-            cor_x = float(lines[0].split(":")[1].strip())
-            cor_y = float(lines[1].split(":")[1].strip())
-            e_x = float(lines[2].split(":")[1].strip())
-            e_y = float(lines[3].split(":")[1].strip())
-
-            return cor_x, cor_y, e_x, e_y
-    except FileNotFoundError:
-        return None, None, None, None
-
-
 def on_press(event):
-    global start_x, start_y, rect
+    global rect
 
     if event.state & 0x4:
-        start_x = canvas.canvasx(event.x)
-        start_y = canvas.canvasy(event.y)
+        globalVariables.start_x = canvas.canvasx(event.x)
+        globalVariables.start_y = canvas.canvasy(event.y)
 
         if rect:
             canvas.delete(rect)
@@ -180,81 +34,33 @@ def on_press(event):
 
 def on_drag(event):
     global rect
+
     cur_x = canvas.canvasx(event.x)
     cur_y = canvas.canvasy(event.y)
 
     if event.state & 0x4:
         if rect:
-            canvas.coords(rect, start_x, start_y, cur_x, cur_y)
+            canvas.coords(rect, globalVariables.start_x,
+                          globalVariables.start_y,
+                          cur_x,
+                          cur_y)
         else:
-            rect = canvas.create_rectangle(start_x, start_y, cur_x, cur_y, fill=rect_color)
+            rect = canvas.create_rectangle(globalVariables.start_x,
+                                           globalVariables.start_y,
+                                           cur_x,
+                                           cur_y,
+                                           fill=rect_color)
 
 
 def on_release(event):
-    global end_x, end_y
-
     if event.state & 0x4:
-        end_x = canvas.canvasx(event.x)
-        end_y = canvas.canvasy(event.y)
+        globalVariables.end_x = canvas.canvasx(event.x)
+        globalVariables.end_y = canvas.canvasy(event.y)
 
-        save_coordinates(start_x, start_y, end_x, end_y)
-
-
-def start_monitoring():
-    monitor_thread = threading.Thread(target=monitor_loop)
-    monitor_thread.setDaemon(True)
-    monitor_thread.start()
-
-
-def monitor_loop():
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(monitor_loop_async())
-
-
-def enable_disable_tts():
-    global enable
-
-    if enable:
-        enable = False
-
-        notification.notify(
-            title="LOTRO To Speech",
-            message="TTS is now Disabled"
-            # Specify the duration (in seconds) the notification should be displayed
-        )
-
-    else:
-        enable = True
-
-        notification.notify(
-            title="LOTRO To Speech",
-            message="TTS is now Enabled"
-            # Specify the duration (in seconds) the notification should be displayed
-        )
-
-
-def is_image_on_screen():
-    global already_talked
-
-    image_to_detect_1 = cv2.imread("quest.png")
-    image_to_detect_2 = cv2.imread("nextObjective.png")
-
-    screenshot = pyautogui.screenshot()
-
-    screenshot_np = np.array(screenshot)
-    screenshot_cv = cv2.cvtColor(screenshot_np, cv2.COLOR_RGB2BGR)
-
-    result_1 = cv2.matchTemplate(screenshot_cv, image_to_detect_1, cv2.TM_CCOEFF_NORMED)
-    min_val_1, max_val_1, min_loc_1, max_loc_1 = cv2.minMaxLoc(result_1)
-
-    result_2 = cv2.matchTemplate(screenshot_cv, image_to_detect_2, cv2.TM_CCOEFF_NORMED)
-    min_val_2, max_val_2, min_loc_2, max_loc_2 = cv2.minMaxLoc(result_2)
-
-    if max_val_1 > 0.7 or max_val_2 > 0.7:
-        return True
-    else:
-        already_talked = False
+        screenCoordinatesFiles.save_coordinates(globalVariables.start_x,
+                                                globalVariables.start_y,
+                                                globalVariables.end_x,
+                                                globalVariables.end_y)
 
 
 def center_window(window, min_width, min_height):
@@ -271,13 +77,13 @@ def center_window(window, min_width, min_height):
 
 
 def ocr_preview(event):
-    global ocr_text_window, ocr_text_widget, text_ocr
+    global ocr_text_window, ocr_text_widget
 
     def get_ocr():
         # Clear existing text
         ocr_text_widget.config(state=tk.NORMAL)
         ocr_text_widget.delete(1.0, tk.END)
-        ocr_text_widget.insert(tk.END, text_ocr)
+        ocr_text_widget.insert(tk.END, globalVariables.text_ocr)
         ocr_text_widget.config(state=tk.DISABLED)
 
     if ocr_text_window is None or not ocr_text_window.winfo_exists():
@@ -310,35 +116,17 @@ def ocr_preview(event):
     # Clear existing text
     ocr_text_widget.config(state=tk.NORMAL)
     ocr_text_widget.delete(1.0, tk.END)
-    ocr_text_widget.insert(tk.END, text_ocr)
+    ocr_text_widget.insert(tk.END, globalVariables.text_ocr)
     ocr_text_widget.config(state=tk.DISABLED)
 
 
 async def monitor_loop_async():
-    global start_x, start_y, end_x, end_y, enable, text_ocr
-
     while True:
         try:
-            if end_x < start_x:
-                start_x, end_x = end_x, start_x
-            if end_y < start_y:
-                start_y, end_y = end_y, start_y
+            if OCRDetectionAndCleanup.ocr_detection_and_cleaup():
 
-            if is_image_on_screen():
-                screenshot = ImageGrab.grab(bbox=(start_x, start_y, end_x, end_y))
-                text = pytesseract.image_to_string(screenshot)
-
-                text = text.replace('\n', ' ')
-                text = text.replace('This is a repeatable quest that you have previously completed.', '')
-
-                text_without_double_spaces = re.sub(r'\s+', ' ', text)
-
-                cleaned_text = re.sub(r'[^a-zA-Z0-9!?.;,:\-\'\" ]', '', text_without_double_spaces)
-
-                text_ocr = cleaned_text
-
-                if enable:
-                    await tts_engine(text_ocr)
+                if globalVariables.enable_disable:
+                    await edgeTTSEngine.tts_engine(globalVariables.text_ocr)
 
             await asyncio.sleep(0.5)
         except Exception as e:
@@ -359,27 +147,32 @@ canvas = tk.Canvas(root, cursor="cross")
 canvas.pack(fill=tk.BOTH, expand=True)
 
 rect = None
-enable = False
-text_ocr = ""
-already_talked = False
+
 ocr_text_window = None
 ocr_text_widget = None
-start_x, start_y, end_x, end_y = load_coordinates()
+
+(globalVariables.start_x,
+ globalVariables.start_y,
+ globalVariables.end_x,
+ globalVariables.end_y) = screenCoordinatesFiles.load_coordinates()
 
 canvas.bind("<ButtonPress-1>", on_press)
 canvas.bind("<B1-Motion>", on_drag)
 canvas.bind("<ButtonRelease-1>", on_release)
 
-keyboard.add_hotkey("ctrl+alt", enable_disable_tts)
+keyboard.add_hotkey("ctrl+alt", enableDisableTTS.enable_disable_tts)
 
-keyboard.add_hotkey("ctrl+shift", stop_audio)
+keyboard.add_hotkey("ctrl+shift", edgeTTSEngine.stop_audio)
 
-if start_x:
-    rect = canvas.create_rectangle(start_x, start_y, end_x, end_y, fill=rect_color)
+if globalVariables.start_x:
+    rect = canvas.create_rectangle(globalVariables.start_x,
+                                   globalVariables.start_y,
+                                   globalVariables.end_x,
+                                   globalVariables.end_y,
+                                   fill=rect_color)
 
-create_voice_file()
-create_tesseract_path_file()
-look_for_tesseract()
-start_monitoring()
+lookForTesseract.look_for_tesseract()
+
+startThreads.start_monitoring(lambda: startThreads.monitor_loop(monitor_loop_async()))
 
 root.mainloop()
