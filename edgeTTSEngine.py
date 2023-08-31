@@ -25,13 +25,13 @@ def play_audio(audio):
 async def tts_engine(text) -> None:
     create_voice_file()
 
-    if not os.path.exists("audios"):
-        os.makedirs("audios")
+    if not os.path.exists(globalVariables.audio_path_string):
+        os.makedirs(globalVariables.audio_path_string)
 
     words = text.split()
     first_5_words = "".join(words[:5]).lower()
     first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
-    audio_file = "audios/" + first_5_words + ".mp3"
+    audio_file = globalVariables.audio_path_string + "/" + first_5_words + ".mp3"
 
     voice = load_voice_file()
 
@@ -55,8 +55,12 @@ async def tts_engine(text) -> None:
 
 
 def create_voice_file():
+
+    if not os.path.exists(globalVariables.voices_path):
+        os.makedirs(globalVariables.voices_path)
+
     try:
-        with open("voice.txt", "x") as file:
+        with open(globalVariables.voices_path + r"/voice.txt", "x") as file:
             pass  # This creates an empty file if it doesn't exist
     except FileExistsError:
         pass  # File already exists, no need to create it
@@ -66,7 +70,7 @@ def load_voice_file():
     voice = ""
 
     try:
-        with open("voice.txt", "r") as file:
+        with open(globalVariables.voices_path + r"/voice.txt", "r") as file:
             lines = file.readlines()
 
             if len(lines) > 0:

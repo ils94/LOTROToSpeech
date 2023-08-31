@@ -27,9 +27,9 @@ def play_audio(audio):
 def tts_engine(text):
     create_api_key_file()
 
-    if not os.path.exists("audios"):
+    if not os.path.exists(globalVariables.audio_path_string):
         # If it doesn't exist, create it
-        os.makedirs("audios")
+        os.makedirs(globalVariables.audio_path_string)
 
     words = text.split()
 
@@ -38,7 +38,7 @@ def tts_engine(text):
 
     first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
 
-    audio_file = "audios/" + first_5_words + ".mp3"
+    audio_file = globalVariables.audio_path_string + "/" + first_5_words + ".mp3"
 
     key, voice = load_api_key()
 
@@ -76,8 +76,11 @@ def tts_engine(text):
 
 
 def create_api_key_file():
+    if not os.path.exists(globalVariables.api_file_path):
+        os.makedirs(globalVariables.api_file_path)
+
     try:
-        with open("api_key.txt", "x") as file:
+        with open(globalVariables.api_file_path + r"/api_key.txt", "x") as file:
             pass  # This creates an empty file if it doesn't exist
     except FileExistsError:
         pass  # File already exists, no need to create it
@@ -87,7 +90,7 @@ def load_api_key():
     key, voice = "", ""
 
     try:
-        with open("api_key.txt", "r") as file:
+        with open(globalVariables.api_file_path + r"/api_key.txt", "r") as file:
             lines = file.readlines()
 
             if len(lines) > 0:
