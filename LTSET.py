@@ -4,7 +4,6 @@ import keyboard
 import edgeTTSEngine
 import asyncio
 import pygame
-
 import startThreads
 import globalVariables
 import screenCoordinatesFiles
