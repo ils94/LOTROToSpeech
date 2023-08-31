@@ -25,7 +25,7 @@ In the OCR Result Window, you can quick refresh the Results by going into Menu -
 
 If the OCR Result Window gets behind the LOTRO To Speech overlay, press Ctrl + A again to bring it back to the front.
 
-# Installing and using
+# Installing
 
 First, you will need to install Tesseract, which is a program that performs OCR to convert image to text.
 
