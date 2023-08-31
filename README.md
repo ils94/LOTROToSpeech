@@ -11,6 +11,20 @@ This version of LOTRO To Speech uses Edge-TTS (Microsoft Edge TTS) engine to gen
 
 If you are willing to fork some money for the best A.I audio generation in the market, this version is for you. It uses Elevenlab engine to generate audio files. More information below.
 
+# Commands and Hotkeys
+
+Holding Ctrl + Left Mouse Button while the LOTRO To Speech overlay is maximized, allows you to drag a rectangle that will be used to delimit the area where the OCR will be performed.
+
+Ctrl + Alt = Enable/Disable TTS
+
+Ctrl + Shift = Stop the Voice Over from playing
+
+While the overlay is maximized, you can hit Ctrl + A to open the OCR Result Window to have a quick preview if the OCR is working.
+
+In the OCR Result Window, you can quick refresh the Results by going into Menu - Refresh OCR.
+
+If the OCR Result Window gets behind the LOTRO To Speech overlay, press Ctrl + A again to bring it back to the front.
+
 # Installing and using
 
 First, you will need to install Tesseract, which is a program that performs OCR to convert image to text.
@@ -39,15 +53,13 @@ Now open LOTRO To Speech overlay and hold Ctrl + Left Mouse Button to drag a rec
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial2.PNG?raw=true)
 
-While in the LOTRO To Speech overlay, you can press Ctrl + A to open the OCR Result Window, and test if the Quest Text is being captured well. You can use the Menu - Refresh OCR button (picture outdated) to refresh the OCR content in real time. If the OCR Result Window gets behind the LOTRO To Speech overlay, just press Ctrl + A again to bring it back to the front.
+While in the LOTRO To Speech overlay, you can use the OCR Result Window by pressing Ctrl + A to quickly preview the OCR Result and see if the text is being captured.
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial3.PNG?raw=true)
 
 **Tip**: Resize the Quest Window as much as you can, and leave the Quest Window to  the right of your screen, because if you leave it to your left, it may read your chat window.
 
-If you want to stop the Voice Playback, you can simple hit Ctrl+Shift.
-
-After you are done setting everything, you can minimize it (do not close LOTRO To Speech) and press "Ctrl+Alt" to enable the TTS.
+After you are done setting everything, you can minimize it (do not close LOTRO To Speech) and press "Ctrl + Alt" to enable the TTS.
 
 You can change the voices for LTSET by opening the file (or creating the file) named "voice.txt" inside the program root folder, and paste in the first line one of the voices from those files:
 
