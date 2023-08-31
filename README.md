@@ -23,7 +23,7 @@ After installing Tesseract, download LTSET (LOTRO To Speech - Edge-TTS Version) 
 
 [LTSET Download Link](https://github.com/ils94/LOTROToSpeech/releases/download/LTSET-Release/LTSET.zip) (up to date)
 
-[LTSEL Download Link](https://github.com/ils94/LOTROToSpeech/releases/download/LTSEL-Release/LTSEL.zip) (outdated)
+[LTSEL Download Link](https://github.com/ils94/LOTROToSpeech/releases/download/LTSEL-Release/LTSEL.zip) (up to date)
 
 unzip the version you downloaded, and run either LTSET.exe or LTSEL.exe inside the program root folder.
 
@@ -58,6 +58,8 @@ Example:
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial5.PNG?raw=true)
 
 Leaving this file empty, will set "en-GB-RyanNeural" as default voice
+
+If you want to stop the voice over, you can simple hit Ctrl+Shift.
 
 ----
 
