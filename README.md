@@ -45,6 +45,8 @@ While in the LOTRO To Speech overlay, you can press Ctrl + A to open the OCR Res
 
 **Tip**: Resize the Quest Window as much as you can, and leave the Quest Window to  the right of your screen, because if you leave it to your left, it may read your chat window.
 
+If you want to stop the Voice Playback, you can simple hit Ctrl+Shift.
+
 After you are done setting everything, you can minimize it (do not close LOTRO To Speech) and press "Ctrl+Alt" to enable the TTS.
 
 You can change the voices for LTSET by opening the file (or creating the file) named "voice.txt" inside the program root folder, and paste in the first line one of the voices from those files:
@@ -58,8 +60,6 @@ Example:
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/tutorial/tutorial5.PNG?raw=true)
 
 Leaving this file empty, will set "en-GB-RyanNeural" as default voice
-
-If you want to stop the voice over, you can simple hit Ctrl+Shift.
 
 ----
 
