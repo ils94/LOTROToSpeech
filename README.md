@@ -1,5 +1,5 @@
 # LOTRO To Speech
-Python program that uses Tesseract to perform OCR to detect text on your screen and convert it to string to be used on voice over A.Is
+A Python program that adds Voice Over to Lord of The Rings Online quests by using OCR.
 
 # Differences between LTSET and LTSEL
 
