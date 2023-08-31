@@ -6,8 +6,8 @@ import globalVariables
 
 def is_image_on_screen():
 
-    image_to_detect_1 = cv2.imread("quest.png")
-    image_to_detect_2 = cv2.imread("nextObjective.png")
+    image_to_detect_1 = cv2.imread("questIcon1.PNG")
+    image_to_detect_2 = cv2.imread("questIcon2.PNG")
 
     screenshot = pyautogui.screenshot()
 
