@@ -1,5 +1,5 @@
 # LOTRO To Speech
-A Python program that adds Voice Over to Lord of The Rings Online quests by using OCR.
+A Python program that adds A.I voice over to Lord of The Rings Online quests by using OCR.
 
 # Differences between LTSET and LTSEL
 
