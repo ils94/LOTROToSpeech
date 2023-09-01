@@ -1,3 +1,10 @@
+# I want to say thanks to the people who helped immensely in this project
+
+Lotro Companion for providing database files with the NPC names and their gender to make it possible to dynamically select voice models
+dt192 for also helping me with database files and for also creating the plugin necessary to help make LOTRO To Speech more dynamic when selectin voice models.
+
+You guys are more than awesome!
+
 # LOTRO To Speech
 A Python program that adds A.I voice over to Lord of The Rings Online quests by using OCR.
 
@@ -32,6 +39,10 @@ First, you will need to install Tesseract, which is a program that performs OCR 
 You can download Tesseract from this link:
 
 https://github.com/UB-Mannheim/tesseract/wiki
+
+Then, I HIGHLY recommend you to download getNPCNames Plugin. This Plugin is VERY NECESSARY to dynamically choose the proper voice model to the NPCs based on their gender.
+
+Link: [Thanking again dt192 for this plugin!](https://github.com/ils94/LOTROToSpeech/blob/master/Helpful%20Stuffs/Plugins/Dt192.zip)
 
 After installing Tesseract, download LTSET (LOTRO To Speech - Edge-TTS Version) or LTSEL (LOTRO To Speech - Eleven Labs TTS Version)
 
