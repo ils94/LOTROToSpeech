@@ -90,7 +90,7 @@ def ocr_preview(event):
         ocr_text_window = tk.Toplevel(root)
         ocr_text_window.title("OCR Result")
         ocr_text_window.geometry("500x500")
-        ocr_text_window.iconbitmap("lotrotospeech.ico")
+        ocr_text_window.iconbitmap("Resources/lotrotospeech.ico")
         ocr_text_window.attributes("-topmost", True)
 
         # Create and pack the Text widget
@@ -140,7 +140,7 @@ root.title("LOTRO To Speech - Edge-TTS Version")
 root.attributes("-alpha", 0.5)
 root.attributes("-topmost", True)
 root.state("zoomed")
-root.iconbitmap("lotrotospeech.ico")
+root.iconbitmap("Resources/lotrotospeech.ico")
 root.bind("<Control-a>", ocr_preview)
 
 canvas = tk.Canvas(root, cursor="cross")
