@@ -1,7 +1,7 @@
 file_path = "Resources/NPCs/npcs.txt"
 
 
-def find_element_containing_string(file_path, search_string, encoding="utf-8"):
+def find_npc_in_the_file(file_path, search_string, encoding="utf-8"):
     try:
         with open(file_path, "r", encoding=encoding) as file:
             file_contents = file.read().split("\n")
@@ -23,7 +23,7 @@ def find_element_containing_string(file_path, search_string, encoding="utf-8"):
 
 
 def return_npc_gender(search_string):
-    result = find_element_containing_string(file_path, search_string)
+    result = find_npc_in_the_file(file_path, search_string)
 
     if result is not None:
         result_lower = result.lower()  # Convert the result to lowercase

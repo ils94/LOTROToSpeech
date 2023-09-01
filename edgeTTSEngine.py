@@ -3,6 +3,7 @@ import os
 import edge_tts
 import re
 import globalVariables
+import getNPCNameFromPluginOutput
 
 
 def stop_audio():
@@ -33,7 +34,7 @@ async def tts_engine(text) -> None:
     first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
     audio_file = globalVariables.audio_path_string + "/" + first_5_words + ".mp3"
 
-    voice = load_voice_file()
+    # voice = load_voice_file()
 
     if globalVariables.already_talked:
         return
@@ -42,8 +43,17 @@ async def tts_engine(text) -> None:
         play_audio(audio_file)
     else:
         if text:
-            if not voice:
-                voice = "en-GB-RyanNeural"
+            # if not voice:
+            #     voice = "en-GB-RyanNeural"
+
+            gender = getNPCNameFromPluginOutput.get_npc_gender_by_name()
+
+            voice = ""
+
+            if gender == "male":
+                voice = "en-US-ChristopherNeural"
+            elif gender == "female":
+                voice = "en-GB-SoniaNeural"
 
             communicate = edge_tts.Communicate(text, voice)
 
