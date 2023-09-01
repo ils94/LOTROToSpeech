@@ -41,7 +41,7 @@ After installing Tesseract, download LTSET (LOTRO To Speech - Edge-TTS Version) 
 
 unzip the version you downloaded, and run either LTSET.exe or LTSEL.exe inside the program root folder.
 
-# How to use
+# How to use (Outdated - Will make a new tutorial for the most recent version and more organized)
 
 **LTSET** (LOTRO To Speech - Edge-TTS Version)
 
