@@ -10,6 +10,7 @@ import lookForTesseract
 import enableDisableTTS
 import OCRDetectionAndCleanup
 import elevenlabTTSEngine
+import createAllFilesAndDirectories
 
 rect_color = "#ffcccb"
 
@@ -162,6 +163,8 @@ canvas.bind("<ButtonRelease-1>", on_release)
 keyboard.add_hotkey("ctrl+alt", enableDisableTTS.enable_disable_tts)
 
 keyboard.add_hotkey("ctrl+shift", elevenlabTTSEngine.stop_audio)
+
+createAllFilesAndDirectories.create()
 
 if globalVariables.start_x:
     rect = canvas.create_rectangle(globalVariables.start_x,
