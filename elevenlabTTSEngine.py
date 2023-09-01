@@ -27,6 +27,7 @@ def play_audio(audio):
 
 def tts_engine(text):
     create_api_key_file()
+    create_elevenlabs_model_file()
 
     if not os.path.exists(globalVariables.audio_path_string):
         # If it doesn't exist, create it
@@ -41,7 +42,9 @@ def tts_engine(text):
 
     audio_file = globalVariables.audio_path_string + "/" + first_5_words + ".mp3"
 
-    key, model = load_api_key()
+    key = load_api_key()
+
+    model = load_elevenlabs_model()
 
     if globalVariables.already_talked:
         return
@@ -92,7 +95,7 @@ def create_api_key_file():
 
 
 def load_api_key():
-    key, model = "", ""
+    key = ""
 
     try:
         with open(globalVariables.config_path + r"/api_key.txt", "r") as file:
@@ -101,9 +104,32 @@ def load_api_key():
             if len(lines) > 0:
                 key = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
 
-            if len(lines) > 1:
-                model = lines[1].strip()  # Use strip() to remove leading/trailing whitespace
-
-            return key, model
+            return key
     except FileNotFoundError:
-        return "", ""
+        return ""
+
+
+def create_elevenlabs_model_file():
+    if not os.path.exists(globalVariables.config_path):
+        os.makedirs(globalVariables.config_path)
+
+    try:
+        with open(globalVariables.config_path + r"/elevenlabs_model.txt", "x") as file:
+            pass  # This creates an empty file if it doesn't exist
+    except FileExistsError:
+        pass  # File already exists, no need to create it
+
+
+def load_elevenlabs_model():
+    model = ""
+
+    try:
+        with open(globalVariables.config_path + r"/elevenlabs_model.txt", "r") as file:
+            lines = file.readlines()
+
+            if len(lines) > 0:
+                model = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
+
+            return model
+    except FileNotFoundError:
+        return ""
