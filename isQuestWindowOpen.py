@@ -1,26 +1,36 @@
+import os
 import cv2
-import numpy as np
 import pyautogui
+import numpy as np
+
 import globalVariables
 
 
 def is_image_on_screen():
+    image_files = []
 
-    image_to_detect_1 = cv2.imread("questIcon1.PNG")
-    image_to_detect_2 = cv2.imread("questIcon2.PNG")
+    # Specify the directory path correctly
+    image_directory = "Images"
 
-    screenshot = pyautogui.screenshot()
+    # Iterate over files in the directory
+    for filename in os.listdir(image_directory):
+        # Check if the file has a common image file extension (e.g., jpg, png, jpeg)
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+            # If it's an image file, add it to the list
+            image_files.append(os.path.join(image_directory, filename))
 
-    screenshot_np = np.array(screenshot)
-    screenshot_cv = cv2.cvtColor(screenshot_np, cv2.COLOR_RGB2BGR)
+    for image_path in image_files:
+        image_to_detect = cv2.imread(image_path)
 
-    result_1 = cv2.matchTemplate(screenshot_cv, image_to_detect_1, cv2.TM_CCOEFF_NORMED)
-    min_val_1, max_val_1, min_loc_1, max_loc_1 = cv2.minMaxLoc(result_1)
+        screenshot = pyautogui.screenshot()
 
-    result_2 = cv2.matchTemplate(screenshot_cv, image_to_detect_2, cv2.TM_CCOEFF_NORMED)
-    min_val_2, max_val_2, min_loc_2, max_loc_2 = cv2.minMaxLoc(result_2)
+        screenshot_np = np.array(screenshot)
+        screenshot_cv = cv2.cvtColor(screenshot_np, cv2.COLOR_RGB2BGR)
 
-    if max_val_1 > 0.7 or max_val_2 > 0.7:
-        return True
-    else:
-        globalVariables.already_talked = False
+        result = cv2.matchTemplate(screenshot_cv, image_to_detect, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+
+        if max_val > 0.7:
+            return True
+        else:
+            globalVariables.already_talked = False
