@@ -6,8 +6,7 @@ import globalVariables
 
 
 def is_image_on_screen():
-    if not os.path.exists(globalVariables.image_detection_path):
-        os.makedirs(globalVariables.image_detection_path)
+    create_images_directory()
 
     image_files = []
 
@@ -43,3 +42,8 @@ def is_image_on_screen():
             return True
         else:
             globalVariables.already_talked = False
+
+
+def create_images_directory():
+    if not os.path.exists(globalVariables.image_detection_path):
+        os.makedirs(globalVariables.image_detection_path)

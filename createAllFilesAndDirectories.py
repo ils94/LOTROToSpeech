@@ -2,6 +2,7 @@ import elevenlabTTSEngine
 import lookForTesseract
 import retriveSaveNPCsVoices
 import getVoicesFromFile
+import isQuestWindowOpen
 
 
 # Just to make sure.
@@ -13,3 +14,4 @@ def create():
     lookForTesseract.create_tesseract_path_file()
     retriveSaveNPCsVoices.create_npcs_voices_file()
     getVoicesFromFile.create_voices_path_files()
+    isQuestWindowOpen.create_images_directory()
