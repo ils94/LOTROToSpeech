@@ -4,6 +4,7 @@ import edge_tts
 import re
 import globalVariables
 import setVoiceByGender
+from tkinter import messagebox
 
 
 def stop_audio():
@@ -39,12 +40,15 @@ async def tts_engine(text) -> None:
         play_audio(audio_file)
     else:
         if text:
-            voice = setVoiceByGender.set_voice("edge-tts")
+            try:
+                voice = setVoiceByGender.set_voice("edge-tts")
 
-            communicate = edge_tts.Communicate(text, voice)
+                communicate = edge_tts.Communicate(text, voice)
 
-            await communicate.save(audio_file)
+                await communicate.save(audio_file)
 
-            play_audio(audio_file)
+                play_audio(audio_file)
+            except Exception as e:
+                messagebox.showerror("Error", str(e))
 
     globalVariables.already_talked = True

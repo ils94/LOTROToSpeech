@@ -1,23 +1,32 @@
 import os
 import cv2
-import pyautogui
 import numpy as np
-
+import pyautogui
 import globalVariables
 
 
 def is_image_on_screen():
+    if not os.path.exists(globalVariables.image_detection_path):
+        os.makedirs(globalVariables.image_detection_path)
+
     image_files = []
 
-    # Specify the directory path correctly
-    image_directory = r"Resources/Images"
+    # Specify the external directory path
+    external_directory = globalVariables.image_detection_path
 
-    # Iterate over files in the directory
-    for filename in os.listdir(image_directory):
+    # Iterate over files in the external directory
+    for filename in os.listdir(external_directory):
         # Check if the file has a common image file extension (e.g., jpg, png, jpeg)
         if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
             # If it's an image file, add it to the list
-            image_files.append(os.path.join(image_directory, filename))
+            image_files.append(os.path.join(external_directory, filename))
+
+    # If no image files were found in the external directory, use the fallback directory
+    if not image_files:
+        image_directory = r"Resources/Images"
+        for filename in os.listdir(image_directory):
+            if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+                image_files.append(os.path.join(image_directory, filename))
 
     for image_path in image_files:
         image_to_detect = cv2.imread(image_path)
