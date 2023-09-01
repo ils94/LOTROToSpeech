@@ -43,6 +43,9 @@ def add_info_to_json(new_data):
 
 
 def get_voice_by_name(name):
+
+    create_npcs_voices_file()
+
     try:
         # Load the existing JSON data from the file
         file_path = os.path.join(globalVariables.config_path, "npcs_voices.json")

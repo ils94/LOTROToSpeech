@@ -3,6 +3,7 @@ import isQuestWindowOpen
 import pytesseract
 from PIL import ImageGrab
 import re
+import lookForTesseract
 
 
 def ocr_detection_and_cleaup():
@@ -18,7 +19,15 @@ def ocr_detection_and_cleaup():
 
     if isQuestWindowOpen.is_image_on_screen():
         screenshot = ImageGrab.grab(bbox=(start_x, start_y, end_x, end_y))
-        text = pytesseract.image_to_string(screenshot)
+
+        lang = lookForTesseract.load_tesseract_lang()
+
+        if not lang:
+            lang = "eng"
+
+        config = '--oem 1 --dpi 300'
+
+        text = pytesseract.image_to_string(screenshot, lang=lang, config=config)
 
         text = text.replace('\n', ' ')
         text = text.replace('This is a repeatable quest that you have previously completed.', '')
