@@ -10,7 +10,7 @@ def is_image_on_screen():
     image_files = []
 
     # Specify the directory path correctly
-    image_directory = "Images"
+    image_directory = r"Resources/Images"
 
     # Iterate over files in the directory
     for filename in os.listdir(image_directory):

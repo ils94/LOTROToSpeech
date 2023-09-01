@@ -1,4 +1,4 @@
-file_path = "npcs.txt"
+file_path = "Resources/NPCs/npcs.txt"
 
 
 def find_element_containing_string(file_path, search_string, encoding="utf-8"):
