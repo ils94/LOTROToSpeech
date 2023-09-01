@@ -5,6 +5,7 @@ import globalVariables
 from elevenlabs import generate, set_api_key, save
 import time
 from tkinter import messagebox
+import setVoiceByGender
 
 
 def stop_audio():
@@ -40,7 +41,7 @@ def tts_engine(text):
 
     audio_file = globalVariables.audio_path_string + "/" + first_5_words + ".mp3"
 
-    key, voice = load_api_key()
+    key, model = load_api_key()
 
     if globalVariables.already_talked:
         return
@@ -53,13 +54,17 @@ def tts_engine(text):
                 try:
                     set_api_key(key)
 
-                    if not voice:
-                        voice = "Bella"
+                    voice = setVoiceByGender.set_voice("elevenlabs")
+
+                    if model:
+                        set_model = model
+                    else:
+                        set_model = "eleven_monolingual_v1"
 
                     audio = generate(
                         text=text,
                         voice=voice,
-                        model="eleven_monolingual_v1"
+                        model=set_model
                     )
 
                     save(audio, audio_file)
@@ -87,7 +92,7 @@ def create_api_key_file():
 
 
 def load_api_key():
-    key, voice = "", ""
+    key, model = "", ""
 
     try:
         with open(globalVariables.config_path + r"/api_key.txt", "r") as file:
@@ -97,8 +102,8 @@ def load_api_key():
                 key = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
 
             if len(lines) > 1:
-                voice = lines[1].strip()  # Use strip() to remove leading/trailing whitespace
+                model = lines[1].strip()  # Use strip() to remove leading/trailing whitespace
 
-            return key, voice
+            return key, model
     except FileNotFoundError:
         return "", ""

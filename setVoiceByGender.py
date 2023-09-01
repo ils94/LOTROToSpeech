@@ -3,7 +3,7 @@ import getVoicesFromFile
 import retriveSaveNPCsVoices
 
 
-def set_voice():
+def set_voice(engine):
     gender, npc_name = getNPCNameFromPluginOutput.get_npc_gender_by_name()
 
     if gender:
@@ -25,6 +25,9 @@ def set_voice():
 
                 return model
             else:
+                if engine == "elevenlabs":
+                    return "Arnold"
+
                 return "en-US-ChristopherNeural"
         if gender == "female":
 
@@ -44,8 +47,17 @@ def set_voice():
 
                 return model
             else:
+                if engine == "elevenlabs":
+                    return "Bella"
+
                 return "en-GB-SoniaNeural"
         else:
+            if engine == "elevenlabs":
+                return "Arnold"
+
             return "en-US-ChristopherNeural"
     else:
+        if engine == "elevenlabs":
+            return "Arnold"
+
         return "en-US-ChristopherNeural"
