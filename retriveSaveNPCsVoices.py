@@ -54,18 +54,10 @@ def get_voice_by_name(name):
             if 'Name' in item and item['Name'] == name:
                 return item.get('Voice', 'Voice not found')  # Return the voice if found
 
-        return 'Name not found'  # If the name is not found
+        return ""  # If the name is not found
 
     except FileNotFoundError:
-        return 'File not found'
+        return ""
     except Exception as e:
-        return f"An error occurred: {str(e)}"
-
-# # Example usage:
-
-# new_info = {'Name': 'John', 'Voice': 'Male'}  # Add the Name and Voice fields
-# add_info_to_json(new_info)
-
-# name_to_search = 'John'
-# voice = get_voice_by_name(name_to_search)
-# print(f"Voice for {name_to_search}: {voice}")
+        print(str(e))
+        return ""

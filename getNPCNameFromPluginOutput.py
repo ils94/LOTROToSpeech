@@ -13,7 +13,7 @@ def get_npc_gender_by_name():
 
                 if lines:
                     last_line = lines[-1].strip()
-                    return getNPCGender.return_npc_gender(last_line)
+                    return getNPCGender.return_npc_gender(last_line), last_line
                 else:
                     print(f"The file {file_path} is empty.")
                     return ""

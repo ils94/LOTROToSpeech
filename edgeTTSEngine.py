@@ -3,7 +3,7 @@ import os
 import edge_tts
 import re
 import globalVariables
-import getNPCNameFromPluginOutput
+import setVoiceByGender
 
 
 def stop_audio():
@@ -24,8 +24,6 @@ def play_audio(audio):
 
 
 async def tts_engine(text) -> None:
-    create_voice_file()
-
     if not os.path.exists(globalVariables.audio_path_string):
         os.makedirs(globalVariables.audio_path_string)
 
@@ -34,8 +32,6 @@ async def tts_engine(text) -> None:
     first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
     audio_file = globalVariables.audio_path_string + "/" + first_5_words + ".mp3"
 
-    # voice = load_voice_file()
-
     if globalVariables.already_talked:
         return
 
@@ -43,17 +39,8 @@ async def tts_engine(text) -> None:
         play_audio(audio_file)
     else:
         if text:
-            # if not voice:
-            #     voice = "en-GB-RyanNeural"
 
-            gender = getNPCNameFromPluginOutput.get_npc_gender_by_name()
-
-            voice = ""
-
-            if gender == "male":
-                voice = "en-US-ChristopherNeural"
-            elif gender == "female":
-                voice = "en-GB-SoniaNeural"
+            voice = setVoiceByGender.set_voice()
 
             communicate = edge_tts.Communicate(text, voice)
 
@@ -62,30 +49,3 @@ async def tts_engine(text) -> None:
             play_audio(audio_file)
 
     globalVariables.already_talked = True
-
-
-def create_voice_file():
-
-    if not os.path.exists(globalVariables.config_path):
-        os.makedirs(globalVariables.config_path)
-
-    try:
-        with open(globalVariables.config_path + r"/voice.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
-    except FileExistsError:
-        pass  # File already exists, no need to create it
-
-
-def load_voice_file():
-    voice = ""
-
-    try:
-        with open(globalVariables.config_path + r"/voice.txt", "r") as file:
-            lines = file.readlines()
-
-            if len(lines) > 0:
-                voice = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
-
-            return voice
-    except FileNotFoundError:
-        return ""
