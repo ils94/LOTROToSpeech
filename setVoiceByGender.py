@@ -16,7 +16,7 @@ def set_voice(engine):
             if model:
                 return model
             else:
-                model = getVoicesFromFile.get_voice("Voice Models/Male Voices.txt")
+                model = getVoicesFromFile.get_voice("Resources/Voice Models/Male Voices.txt")
 
                 new_info = {'Name': npc_name, 'Voice': model}
 
@@ -31,7 +31,7 @@ def set_voice(engine):
                 return model
             else:
 
-                model = getVoicesFromFile.get_voice("Voice Models/Female Voices.txt")
+                model = getVoicesFromFile.get_voice("Resources/Voice Models/Female Voices.txt")
 
                 new_info = {'Name': npc_name, 'Voice': model}
 
