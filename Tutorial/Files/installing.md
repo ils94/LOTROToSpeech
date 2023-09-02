@@ -12,7 +12,7 @@ Link: [Thanking again dt192 for this plugin!](https://github.com/ils94/LOTROToSp
 
 If you don't know how to install a Plugin, you can follow the tutorial in this [link](https://www.lotrointerface.com/wiki/Install_plugins)
 
-After installing Tesseract, download LTSET (LOTRO To Speech - Edge-TTS) or LTSEL (LOTRO To Speech - ElevenLabs TTS)
+After installing Tesseract, download LTSET (LOTRO To Speech - Edge-TTS Version) or LTSEL (LOTRO To Speech - ElevenLabs TTS Version)
 
 [LTSET Download Link](https://github.com/ils94/LOTROToSpeech/releases/download/LTSET-Release/LTSET.zip) (up to date)
 
