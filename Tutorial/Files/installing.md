@@ -4,7 +4,9 @@ First, you will need to install Tesseract, which is a program that performs OCR 
 
 You can download Tesseract from this [link](https://github.com/UB-Mannheim/tesseract/wiki)
 
-Then, I HIGHLY recommend you to download getNPCNames Plugin. This Plugin is VERY NECESSARY to dynamically choose the proper voice model for the NPCs based on their gender.
+There is a very nice tutorial teaching how to install Tesseract on Windows by [linuxhint](https://linuxhint.com/install-tesseract-windows/)
+
+Download and install getNPCNames Plugin. This Plugin is VERY NECESSARY to dynamically choose the proper voice model for the NPCs based on their gender.
 
 Link: [Thanking again dt192 for this plugin!](https://github.com/ils94/LOTROToSpeech/blob/master/Helpful%20Stuffs/Plugins/Dt192.zip)
 
