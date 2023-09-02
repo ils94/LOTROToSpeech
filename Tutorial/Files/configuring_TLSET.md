@@ -12,7 +12,7 @@ Now open LOTRO To Speech overlay and hold Ctrl + Left Mouse Button to drag a rec
 
 **Tip:** Try to adjust the rectangle edges a bit close to the text, but not so close. That way, the OCR has less area to scan.
 
-While in the LOTRO To Speech overlay, you can use the **OCR Result** window by pressing **Ctrl + A** to quickly preview the OCR Result and see if the text is being captured. The **Menu - Refresh OCR** can be used to quickly refresh the OCR data and show how is the text beind capture in real time.
+While in the LOTRO To Speech overlay, you can use the **OCR Result** window by pressing **Ctrl + A** to quickly preview the OCR Result and see if the text is being captured. The **Menu - Refresh OCR** can be used to quickly refresh the OCR data and show how is the text being captured in real time.
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/Tutorial/Images/tutorial3.PNG?raw=true)
 
