@@ -4,7 +4,7 @@ You can mod LOTRO To Speech. This is an important part because here you will lea
 
 # Adding your voice models
 
-You can add your voice models that are compatible with either Edge-TTS and Elevenlab-TTS
+You can add your voice models that are compatible with either Edge-TTS and ElevenLabs-TTS
 
 Lets start with LTSET (LOTRO To Speech - Edge-TTS)
 
@@ -49,7 +49,7 @@ en-HK-YanNeural
  .  
  .  
 
-For the LTSEL (LOTRO To Speech - Elevenlab-TTS) the idea is the same, but of course, you will use voice models compatible with Elevenlabs:
+For the LTSEL (LOTRO To Speech - ElevenLabs-TTS) the idea is the same, but of course, you will use voice models compatible with ElevenLabs:
 
 Arnold  
 Alex  
@@ -58,7 +58,7 @@ John
 .  
 .  
 
-As you can see, Elevenlabs use simple names for their voice name models.
+As you can see, ElevenLabs use simple names for their voice name models.
 
 # Images used for detecting if Quest Window is open
 
@@ -79,3 +79,27 @@ The formats supported for the detection images are: PNG, JPG and JPEG.
 When LOTRO To Speech detect any of these files extensions in that directory, it will use them to do Pixel Recognition, instead of the default images in the LTS root folder.
 
 # Other configurations
+
+There are some other configurations that you can apply to LOTRO To Speech.
+
+We will focus on 4 files here:
+
+- api_key.txt
+- elevenlabs_model.txt
+- tesseract_lang.txt
+- tesseract_path.txt
+
+**api_key.txt**
+
+This file is where you put your ElevenLabs API key to generate voice files from their tool, if you are using LTSEL (LOTRO To Speech - ElevenLabs-TTS Version) you have to save your API Key in that file, else, you will receive an error when trying to generate voice files.
+
+**elevenlabs_model.txt**
+
+Here you can add voice models supported by ElevenLabs.
+
+Currently, there are only 2 voice models supported:
+
+- monolingual
+- multilingual
+
+For more information, visit [Models - ElevenLabs](https://docs.elevenlabs.io/speech-synthesis/models)
