@@ -14,9 +14,11 @@ Now open LOTRO To Speech overlay and hold Ctrl + Left Mouse Button to drag a rec
 
 While in the LOTRO To Speech overlay, you can use the **OCR Result** window by pressing **Ctrl + A** to quickly preview the OCR Result and see if the text is being captured. The **Menu - Refresh OCR** can be used to quickly refresh the OCR data and show how is the text beind capture in real time.
 
-![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/Tutorial/Images/tutorial3.PNG?raw=true)
+You also can correct the OCR text if you find any mistakes, and even manually generate the audio for the quest you are currently trying to generate. Simple press the button **"Generate Audio"** in the Menu when you feel the text is correct!
 
-**Tip:** Resize the Quest Window as much as you can, and leave the it away from your Chat, because if you leave it close, the OCR may read your chat window. Also, increase the font size of the Quest Window, but do not increase it too much, else, the text will become too big and will add Scrollbars. The text must be 100% visible in the screen for the OCR to detect it.
+![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/Tutorial/Images/tutorial3.jpg?raw=true)
+
+**Tip:** Resize the Quest Window as much as you can, and leave the it away from your Chat, because if you leave it close, the OCR may read your chat window.
 
 Now, you will need to save your API Key in the api_key.txt file in your: 
 
