@@ -9,7 +9,7 @@ import screenCoordinatesFiles
 import lookForTesseract
 import enableDisableTTS
 import OCRDetectionAndCleanup
-import elevenlabTTSEngine
+import elevenLabsTTSEngine
 import createAllFilesAndDirectories
 
 rect_color = "#ffcccb"
@@ -126,7 +126,7 @@ def monitor_loop():
             if OCRDetectionAndCleanup.ocr_detection_and_cleaup():
 
                 if globalVariables.enable_disable:
-                    elevenlabTTSEngine.tts_engine(globalVariables.text_ocr)
+                    elevenLabsTTSEngine.tts_engine(globalVariables.text_ocr)
 
             time.sleep(0.5)
         except Exception as e:
@@ -162,7 +162,7 @@ canvas.bind("<ButtonRelease-1>", on_release)
 
 keyboard.add_hotkey("ctrl+alt", enableDisableTTS.enable_disable_tts)
 
-keyboard.add_hotkey("ctrl+shift", elevenlabTTSEngine.stop_audio)
+keyboard.add_hotkey("ctrl+shift", elevenLabsTTSEngine.stop_audio)
 
 createAllFilesAndDirectories.create()
 
