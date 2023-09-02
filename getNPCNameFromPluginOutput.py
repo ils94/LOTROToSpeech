@@ -16,10 +16,10 @@ def get_npc_gender_by_name():
                     return getNPCGender.return_npc_gender(last_line), last_line
                 else:
                     print(f"The file {file_path} is empty.")
-                    return ""
+                    return "", ""
         except Exception as e:
             print(f"Error reading the file: {e}")
-            return ""
+            return "", ""
     else:
         print(f"The file {file_path} does not exist.")
-        return ""
+        return "", ""

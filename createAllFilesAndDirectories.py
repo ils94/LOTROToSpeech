@@ -3,6 +3,7 @@ import lookForTesseract
 import retriveSaveNPCsVoices
 import getVoicesFromFile
 import isQuestWindowOpen
+import cleanText
 
 
 # Just to make sure.
@@ -15,3 +16,4 @@ def create():
     retriveSaveNPCsVoices.create_npcs_voices_file()
     getVoicesFromFile.create_voices_path_files()
     isQuestWindowOpen.create_images_directory()
+    cleanText.create_replace_string_file()
