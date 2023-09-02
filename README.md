@@ -4,6 +4,8 @@
 
 [dt192](https://github.com/dt192) for also helping me with database files and for also creating the plugin necessary to help make LOTRO To Speech more dynamic when selectin voice models.
 
+[revcr](https://www.reddit.com/user/revcr/) for giving me his ElevenLabs API paid key to test audio generation (sorry for wasting your characters quota dude haha)
+
 You guys are more than awesome!
 
 # LOTRO To Speech
