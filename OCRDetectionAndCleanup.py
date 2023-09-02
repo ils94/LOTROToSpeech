@@ -2,8 +2,8 @@ import globalVariables
 import isQuestWindowOpen
 import pytesseract
 from PIL import ImageGrab
-import re
 import lookForTesseract
+import cleanText
 
 
 def ocr_detection_and_cleaup():
@@ -25,17 +25,8 @@ def ocr_detection_and_cleaup():
         if not lang:
             lang = "eng"
 
-        config = '--oem 1 --dpi 300'
+        text = pytesseract.image_to_string(screenshot, lang=lang)
 
-        text = pytesseract.image_to_string(screenshot, lang=lang, config=config)
-
-        text = text.replace('\n', ' ')
-        text = text.replace('This is a repeatable quest that you have previously completed.', '')
-
-        text_without_double_spaces = re.sub(r'\s+', ' ', text)
-
-        cleaned_text = re.sub(r'[^a-zA-Z0-9!?.;,:\-\'\" ]', '', text_without_double_spaces)
-
-        globalVariables.text_ocr = cleaned_text
+        globalVariables.text_ocr = cleanText.clear(text)
 
         return True

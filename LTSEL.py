@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Menu
+from tkinter import Menu, messagebox
 import time
 import keyboard
 import pygame
@@ -81,10 +81,8 @@ def ocr_preview(event):
 
     def get_ocr():
         # Clear existing text
-        ocr_text_widget.config(state=tk.NORMAL)
         ocr_text_widget.delete(1.0, tk.END)
         ocr_text_widget.insert(tk.END, globalVariables.text_ocr)
-        ocr_text_widget.config(state=tk.DISABLED)
 
     if ocr_text_window is None or not ocr_text_window.winfo_exists():
         ocr_text_window = tk.Toplevel(root)
@@ -103,6 +101,9 @@ def ocr_preview(event):
 
         menu.add_command(label="Refresh OCR", command=get_ocr)
 
+        menu.add_command(label="Generate Audio", command=lambda: startThreads.start_monitoring(
+            lambda: manual_audio_generation(ocr_text_widget.get("1.0", "end-1c"))))
+
         menu_bar.add_cascade(label="Menu", menu=menu)
 
         ocr_text_window.config(menu=menu_bar)
@@ -112,12 +113,6 @@ def ocr_preview(event):
     else:
         # If the window exists, bring it to the top (optional)
         ocr_text_window.attributes("-topmost", True)
-
-    # Clear existing text
-    ocr_text_widget.config(state=tk.NORMAL)
-    ocr_text_widget.delete(1.0, tk.END)
-    ocr_text_widget.insert(tk.END, globalVariables.text_ocr)
-    ocr_text_widget.config(state=tk.DISABLED)
 
 
 def monitor_loop():
@@ -133,6 +128,13 @@ def monitor_loop():
             print(e)
             time.sleep(3)
             continue
+
+
+def manual_audio_generation(text):
+    try:
+        elevenLabsTTSEngine.tts_engine(text)
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
 
 
 root = tk.Tk()
@@ -175,6 +177,6 @@ if globalVariables.start_x:
 
 lookForTesseract.look_for_tesseract()
 
-startThreads.start_monitoring(lambda: startThreads.start_monitoring(monitor_loop))
+startThreads.start_monitoring(monitor_loop)
 
 root.mainloop()
