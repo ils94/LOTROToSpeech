@@ -70,7 +70,7 @@ For this, all you have to do is to take pictures of parts of your Quest Window. 
 
 With Snipping Tool, you can precisely take some image cues of your Quest Window like some unique button, text label, icon and so on.
 
-After taking the picture, you should save them in:
+After taking the picture(s), you should save them in:
 
 C:\Users\YOURUSER\Documents\LOTROToSpeech\Detection
 
