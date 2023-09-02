@@ -1,4 +1,4 @@
-# Configuring LOTRO to Speech - Elevenlab TTS Version
+# Configuring LOTRO to Speech - ElevenLabs TTS Version
 
 Open your game and look for a NPC with a quest available so you can use it as base:
 
