@@ -16,7 +16,7 @@ While in the LOTRO To Speech overlay, you can use the **OCR Result** window by p
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/Tutorial/Images/tutorial3.PNG?raw=true)
 
-**Tip:** Resize the Quest Window as much as you can, and leave the it away from your Chat, because if you leave it close, the OCR may read your chat window. Also, increase the font size of the Quest Window, but do not increase it too much, else, the text will become too big and will add Scrollbars. The text must be 100% visible in the screen for the OCR to detect it.
+**Tip:** Resize the Quest Window as much as you can, and leave it away from your Chat, because if you leave it close, the OCR may read your chat window.
 
 After you are done setting everything, you can minimize it (do not close LOTRO To Speech) and press "Ctrl + Alt" to enable the TTS.
 
