@@ -6,7 +6,7 @@ You can mod LOTRO To Speech. This is an important part because here you will lea
 
 You can add your voice models that are compatible with either Edge-TTS and ElevenLabs-TTS
 
-Lets start with LTSET (LOTRO To Speech - Edge-TTS)
+Lets start with LTSET (LOTRO To Speech - Edge-TTS Version)
 
 To add your voice models, you have to go to:
 
@@ -49,7 +49,7 @@ en-HK-YanNeural
  .  
  .  
 
-For the LTSEL (LOTRO To Speech - ElevenLabs-TTS) the idea is the same, but of course, you will use voice models compatible with ElevenLabs:
+For the LTSEL (LOTRO To Speech - ElevenLabs-TTS Version) the idea is the same, but of course, you will use voice models compatible with ElevenLabs:
 
 Arnold  
 Alex  
