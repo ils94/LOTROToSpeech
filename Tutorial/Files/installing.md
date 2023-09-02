@@ -8,7 +8,7 @@ There is a very nice tutorial teaching how to install Tesseract on Windows by [l
 
 Download and install getNPCNames Plugin. This Plugin is VERY NECESSARY to dynamically choose the proper voice model for the NPCs based on their gender.
 
-Link: [Thanking again dt192 for this plugin!](https://github.com/ils94/LOTROToSpeech/blob/master/Helpful%20Stuffs/Plugins/Dt192.zip)
+Link: [Thanking again dt192 for this plugin!](https://github.com/ils94/LOTROToSpeech/raw/master/Helpful%20Stuffs/Plugins/Dt192.zip)
 
 If you don't know how to install a Plugin, you can follow the tutorial in this [link](https://www.lotrointerface.com/wiki/Install_plugins)
 
