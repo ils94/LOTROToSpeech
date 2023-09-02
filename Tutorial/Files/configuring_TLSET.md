@@ -22,4 +22,4 @@ After you are done setting everything, you can minimize it (do not close LOTRO T
 
 Now, you are ready for the next step:
 
-Modding LOTRO To Speech
+[Modding LOTRO To Speech](https://github.com/ils94/LOTROToSpeech/blob/master/Tutorial/Files/modding.md)
