@@ -82,16 +82,21 @@ When LOTRO To Speech detect any of these files extensions in that directory, it 
 
 There are some other configurations that you can apply to LOTRO To Speech.
 
-We will focus on 4 files here:
+We will focus on 5 files here:
 
 - api_key.txt
 - elevenlabs_model.txt
+- replace_string.txt
 - tesseract_lang.txt
 - tesseract_path.txt
+
+---
 
 **api_key.txt**
 
 This file is where you put your ElevenLabs API key to generate voice files from their tool, if you are using LTSEL (LOTRO To Speech - ElevenLabs-TTS Version) you have to save your API Key in that file, else, you will receive an error when trying to generate voice files.
+
+---
 
 **elevenlabs_model.txt**
 
@@ -104,11 +109,28 @@ Currently, there are only 2 voice models supported:
 
 For more information, visit [Models - ElevenLabs](https://docs.elevenlabs.io/speech-synthesis/models)
 
+---
+
+**replace_strings.txt**
+
+Here you can add strings that will be replaced by other strings in the OCR Text. Sometimes Tesseract will misread l (L) for 1 (one), or 'I for a T, or sometimes you wish that your character name wasn't in the text, because your goal is to generate voices to be used by other players, so making them as generic as possible, and having to remove your character name everytime you want to create a voice file would be very annoying. Well, just add your character name followed by ,"" and it will remove it, here is a example:
+
+yourcharname,""  
+'I,I  
+something,anotherthing  
+.  
+.  
+.
+
+---
+
 **tesseract_lang.txt**
 
 Here you can add the language Tesseract will analyze in your text, for more information of what languages are support by Tesseract, go to this [link](https://github.com/ils94/LOTROToSpeech/blob/master/Helpful%20Stuffs/Languages/Tesseract%20Supported%20Languages.txt)
 
 By default, Tesseract is set to analyze "eng" (English) text, for others languages, you should mark additional languages to be downloaded and installed during Tesseract installation.
+
+---
 
 **tesseract_path.txt**
 
