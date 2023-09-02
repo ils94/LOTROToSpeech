@@ -106,7 +106,7 @@ For more information, visit [Models - ElevenLabs](https://docs.elevenlabs.io/spe
 
 **tesseract_lang.txt**
 
-Here you can add the language Tesseract will anaylise in your text, for more information of what languages are support by Tesseract, go to this [link](https://github.com/ils94/LOTROToSpeech/blob/master/Helpful%20Stuffs/Languages/Tesseract%20Supported%20Languages.txt)
+Here you can add the language Tesseract will analyze in your text, for more information of what languages are support by Tesseract, go to this [link](https://github.com/ils94/LOTROToSpeech/blob/master/Helpful%20Stuffs/Languages/Tesseract%20Supported%20Languages.txt)
 
 By default, Tesseract is set to analyze "eng" (English) text, for others languages, you should mark additional languages to be downloaded and installed during Tesseract installation.
 
