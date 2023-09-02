@@ -51,3 +51,31 @@ en-HK-YanNeural
 
 For the LTSEL (LOTRO To Speech - Elevenlab-TTS) the idea is the same, but of course, you will use voice models compatible with Elevenlabs:
 
+Arnold  
+Alex  
+John  
+.  
+.  
+.  
+
+As you can see, Elevenlabs use simple names for their voice name models.
+
+# Images used for detecting if Quest Window is open
+
+If you use Interface Addons that change Quest Window appearence, well, LOTRO To Speech may not work, because it's default configuration is to look for vanilla sprites in the Quest Windows.
+
+But don't worry! You can still use your Interface Addon, but you will need to feed LOTRO To Speech the knowledge of what it should look for to detect if the Quest Window is open in your Interface Addon.
+
+For this, all you have to do is to take pictures of parts of your Quest Window. I recommend using Windows Snipping Tool.
+
+With Snipping Tool, you can precisely take some image cues of your Quest Window like some unique button, text label, icon and so on.
+
+After taking the picture, you should save them in:
+
+C:\Users\YOURUSER\Documents\LOTROToSpeech\Detection
+
+The formats supported for the detection images are: PNG, JPG and JPEG.
+
+When LOTRO To Speech detect any of these files extensions in that directory, it will use them to do Pixel Recognition, instead of the default images in the LTS root folder.
+
+# Other configurations
