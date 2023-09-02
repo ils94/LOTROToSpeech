@@ -1,8 +1,8 @@
 # I want to say thanks to the people who helped immensely in this project
 
-Lotro Companion for providing database files with the NPC names and their gender to make it possible to dynamically select voice models
+[Lotro Companion](https://github.com/LotroCompanion) for providing database files with the NPC names and their gender to make it possible to dynamically select voice models
 
-dt192 for also helping me with database files and for also creating the plugin necessary to help make LOTRO To Speech more dynamic when selectin voice models.
+[dt192](https://github.com/dt192) for also helping me with database files and for also creating the plugin necessary to help make LOTRO To Speech more dynamic when selectin voice models.
 
 You guys are more than awesome!
 
