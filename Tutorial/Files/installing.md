@@ -20,6 +20,6 @@ unzip the version you downloaded, and run either LTSET.exe or LTSEL.exe inside t
 
 Now, you are ready for the next step:
 
-Configuring LTSET Version
+[Configuring LTSET Version](https://github.com/ils94/LOTROToSpeech/blob/master/Tutorial/Files/configuring_TLSET.md)
 
-Configuring LTSEL Version
+[Configuring LTSEL Version](https://github.com/ils94/LOTROToSpeech/blob/master/Tutorial/Files/configuring_TLSEL.md)
