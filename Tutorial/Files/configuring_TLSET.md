@@ -4,7 +4,7 @@ Open your game and look for a NPC with a quest available so you can use it as ba
 
 ![enter image description here](https://github.com/ils94/LOTROToSpeech/blob/master/Tutorial/Images/tutorial1.PNG?raw=true)
 
-**Tip:** Increase the font size of the quest window, to increase the accurecy of the OCR detection.
+**Tip:** Increase the font size of the quest window, to increase the accuracy of the OCR detection.
 
 Now open LOTRO To Speech overlay and hold Ctrl + Left Mouse Button to drag a rectangle around the text of the quest:
 
