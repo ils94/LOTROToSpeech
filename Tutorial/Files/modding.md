@@ -58,8 +58,6 @@ John
 .  
 .  
 
-As you can see, ElevenLabs use simple names for their voice name models.
-
 # Images used for detecting if Quest Window is open
 
 If you use Interface Addons that change Quest Window appearence, well, LOTRO To Speech may not work, because it's default configuration is to look for vanilla sprites in the Quest Windows.
