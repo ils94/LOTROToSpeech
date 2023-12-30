@@ -33,10 +33,10 @@ def create_tesseract_lang_file():
 
 
 def load_tesseract_lang():
-    lang = globalVariables.config_path
+    path = globalVariables.config_path
 
     try:
-        with open("tesseract_lang.txt", "r") as file:
+        with open(path + "/tesseract_lang.txt", "r") as file:
             lines = file.readlines()
 
             if len(lines) > 0:
@@ -44,7 +44,7 @@ def load_tesseract_lang():
 
             return lang
     except FileNotFoundError:
-        return ""
+        return "ops"
 
 
 def load_tesseract_path():
@@ -81,9 +81,5 @@ def look_for_tesseract():
             else:
                 pytesseract.pytesseract.tesseract_cmd = load_tesseract_path()
         else:
-            messagebox.showerror("Error", "Cannot find Tesseract. Download Tesseract from LOTRO To Speech "
-                                          "Github page and install it. If you have already installed it, but installed "
-                                          "in another path, go to LTSET root folder, and paste the path to your "
-                                          "Tesseract into tesseract_path.txt.")
-
+            messagebox.showerror("Error", "Cannot find Tesseract. Download Tesseract from LOTRO To Speech Github page and install it. If you have already installed it, but installed in another path, go to C:/Users/YOURUSER/Documents/LOTROToSpeech/Configs, and paste the path to your Tesseract into tesseract_path.txt.")
             sys.exit()
