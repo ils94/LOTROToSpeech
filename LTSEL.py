@@ -164,7 +164,7 @@ canvas.bind("<ButtonRelease-1>", on_release)
 
 keyboard.add_hotkey("ctrl+alt", enableDisableTTS.enable_disable_tts)
 
-keyboard.add_hotkey("ctrl+shift", elevenLabsTTSEngine.stop_audio)
+keyboard.add_hotkey("ctrl+tab", elevenLabsTTSEngine.stop_audio)
 
 createAllFilesAndDirectories.create()
 

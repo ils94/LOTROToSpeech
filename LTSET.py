@@ -132,6 +132,12 @@ async def monitor_loop_async():
 
 
 async def manual_audio_generation(text):
+
+    globalVariables.tesseract_language = lookForTesseract.load_tesseract_lang()
+
+    if not globalVariables.tesseract_language:
+        globalVariables.tesseract_language = "eng"
+
     try:
         await edgeTTSEngine.tts_engine(text)
     except Exception as e:
@@ -165,7 +171,7 @@ canvas.bind("<ButtonRelease-1>", on_release)
 
 keyboard.add_hotkey("ctrl+alt", enableDisableTTS.enable_disable_tts)
 
-keyboard.add_hotkey("ctrl+shift", edgeTTSEngine.stop_audio)
+keyboard.add_hotkey("ctrl+tab", edgeTTSEngine.stop_audio)
 
 createAllFilesAndDirectories.create()
 

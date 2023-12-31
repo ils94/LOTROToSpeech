@@ -20,12 +20,12 @@ def ocr_detection_and_cleaup():
     if isQuestWindowOpen.is_image_on_screen():
         screenshot = ImageGrab.grab(bbox=(start_x, start_y, end_x, end_y))
 
-        lang = lookForTesseract.load_tesseract_lang()
+        globalVariables.tesseract_language = lookForTesseract.load_tesseract_lang()
 
-        if not lang:
-            lang = "eng"
+        if not globalVariables.tesseract_language:
+            globalVariables.tesseract_language = "eng"
 
-        text = pytesseract.image_to_string(screenshot, lang=lang)
+        text = pytesseract.image_to_string(screenshot, lang=globalVariables.tesseract_language)
 
         globalVariables.text_ocr = cleanText.clear(text)
 
