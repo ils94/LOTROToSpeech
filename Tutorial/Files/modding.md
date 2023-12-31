@@ -128,6 +128,20 @@ Here you can add the language Tesseract will analyze in your text, for more info
 
 By default, Tesseract is set to analyze "eng" (English) text, for others languages, you should mark additional languages to be downloaded and installed during Tesseract installation.
 
+Lord of the Rings Online support 3 languages: English (eng), Deutsch (deu) and Français (fra)
+
+If you play the game in both Deutsch and Français, and are using the LTSET (LOTRO To Speech - Edge-TTS Version), you must do these tweaks for it to be fully functional:
+
+In the root folder of LTSET, you will find a folder called "Resources", and inside that folder there is another folder called "NPCs". By default the npcs.txt is the English version of the npcs names, so if you want to switch to Deutsch (deu), you should rename npcs.txt to npcsEN.txt and rename npcsDE.txt to npcs.txt, that way, LTSET and LTSEL should be able to detect the correct npcs in your set language.
+
+Then, you will have to add the proper voices for female and male in "C:\Users\YOURUSER\Documents\LOTROToSpeech\Voices". There, you will find 2 files named Female Voices.txt and Male Voices.txt. You must save at least one voice model inside each folder that are compatible with your set language, otherwise it will fallback to the default English voice A.I and the result will be weird.
+
+You can see the voice models available for Edge-TTS in these links:
+
+[All Voice Models + information about them](https://github.com/ils94/LOTROToSpeech/blob/master/Helpful%20Stuffs/Languages/List%20of%20voices%20available%20in%20Edge%20TTS.txt)
+
+[Simplified file containing all voices available](https://github.com/ils94/LOTROToSpeech/blob/master/Helpful%20Stuffs/Languages/All%20Voice%20Models%20Female%20and%20Male%20Available%20(Easy%20to%20copy%20paste).txt)
+
 ---
 
 **tesseract_path.txt**
