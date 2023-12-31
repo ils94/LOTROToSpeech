@@ -43,8 +43,6 @@ async def tts_engine(text) -> None:
             try:
                 voice = setVoiceByGender.set_voice("edge-tts")
 
-                print(voice)
-
                 communicate = edge_tts.Communicate(text, voice)
 
                 await communicate.save(audio_file)

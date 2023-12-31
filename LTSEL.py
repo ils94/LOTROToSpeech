@@ -124,9 +124,8 @@ def monitor_loop():
                     elevenLabsTTSEngine.tts_engine(globalVariables.text_ocr)
 
             time.sleep(0.5)
-        except Exception as e:
-            print(e)
-            time.sleep(3)
+        except Exception:
+            time.sleep(1)
             continue
 
 

@@ -2,8 +2,6 @@ import globalVariables
 
 
 def default_voice():
-    print(globalVariables.tesseract_language)
-
     if globalVariables.tesseract_language == "deu":
         return "de-DE-KillianNeural"
     if globalVariables.tesseract_language == "fra":

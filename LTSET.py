@@ -125,9 +125,8 @@ async def monitor_loop_async():
                     await edgeTTSEngine.tts_engine(globalVariables.text_ocr)
 
             await asyncio.sleep(0.5)
-        except Exception as e:
-            print(e)
-            await asyncio.sleep(3)
+        except Exception:
+            await asyncio.sleep(1)
             continue
 
 

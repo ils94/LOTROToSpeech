@@ -34,6 +34,7 @@ def create_tesseract_lang_file():
 
 def load_tesseract_lang():
     path = globalVariables.config_path
+    lang = ""
 
     try:
         with open(path + "/tesseract_lang.txt", "r") as file:

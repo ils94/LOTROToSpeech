@@ -32,18 +32,13 @@ def add_info_to_json(new_data):
             # Save the updated JSON data back to the file
             with open(file_path, 'w') as file:
                 json.dump(existing_data, file, indent=4)
-
-            print("Added new information successfully.")
         else:
-            print("Data already exists and was not added.")
-    except FileNotFoundError:
-        print("File not found")
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
+            pass
+    except Exception:
+        pass
 
 
 def get_voice_by_name(name):
-
     create_npcs_voices_file()
 
     try:
@@ -58,9 +53,5 @@ def get_voice_by_name(name):
                 return item.get('Voice', 'Voice not found')  # Return the voice if found
 
         return ""  # If the name is not found
-
-    except FileNotFoundError:
-        return ""
-    except Exception as e:
-        print(str(e))
+    except Exception:
         return ""
