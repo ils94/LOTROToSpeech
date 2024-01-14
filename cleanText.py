@@ -12,7 +12,7 @@ def clear(text):
 
     text_without_double_spaces = re.sub(r'\s+', ' ', text)
 
-    return re.sub(r'[^a-zA-Z0-9!?.;,:\-\'\" ]', '', text_without_double_spaces)
+    return re.sub(r'[^a-zA-Z0-9!?.;,:\-\'\"äöüßàâçéèêëîïôûùÿæœÀÂÇÉÈÊËÎÏÔÛÙÜŸÆŒ ]', '', text_without_double_spaces)
 
 
 def create_replace_string_file():
