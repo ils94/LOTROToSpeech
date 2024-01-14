@@ -4,7 +4,7 @@
 
 **Ctrl + Alt** = Enable/Disable TTS
 
-**Ctrl + Shift** = Stop the audio
+**Ctrl + Tab** = Stop the audio
 
 While the overlay is maximized, you can hit **Ctrl + A** to open the **OCR Result** window to have a quick preview if the OCR is working.
 
