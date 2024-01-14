@@ -10,6 +10,8 @@ def clear(text):
 
     text = replace_strings(text)
 
+    # print(text)
+
     text_without_double_spaces = re.sub(r'\s+', ' ', text)
 
     return re.sub(r'[^a-zA-Z0-9!?.;,:\-\'\"äöüßàâçéèêëîïôûùÿæœÀÂÇÉÈÊËÎÏÔÛÙÜŸÆŒ ]', '', text_without_double_spaces)
@@ -33,7 +35,7 @@ def replace_strings(input_string):
 
     # Read the file and store its contents in a dictionary.
     replacements = {}
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding='utf-8') as file:
         for line in file:
             parts = line.strip().split(',')
             if len(parts) == 2:
