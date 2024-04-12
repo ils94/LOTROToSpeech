@@ -11,6 +11,10 @@ You guys are more than awesome!
 # LOTRO To Speech
 A Python program that adds A.I voice over to Lord of The Rings Online quests by using OCR.
 
+If you want to donate, here is my Bitcoin Address:
+
+bc1qzj94gw62ht3c6dlhdvuz7uqgh9zmdy9sfm9yau
+
 # Differences between LTSET and LTSEL
 
 **LTSET** (LOTRO To Speech - Edge-TTS Version)
