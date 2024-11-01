@@ -11,13 +11,14 @@ import enableDisableTTS
 import OCRDetectionAndCleanup
 import elevenLabsTTSEngine
 import createAllFilesAndDirectories
+import elevenlabsShowVoicesAvailable
+import getElevenLabsAvailableVoice
 
 rect_color = "#ffcccb"
 
-# Initialize Pygame
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.stop()  # Stop the initial Pygame playback
+pygame.mixer.music.stop()
 
 
 def on_press(event):
@@ -80,9 +81,12 @@ def ocr_preview(event):
     global ocr_text_window, ocr_text_widget
 
     def get_ocr():
-        # Clear existing text
         ocr_text_widget.delete(1.0, tk.END)
         ocr_text_widget.insert(tk.END, globalVariables.text_ocr)
+
+    def show_voices():
+        ocr_text_widget.delete(1.0, tk.END)
+        ocr_text_widget.insert(tk.END, elevenlabsShowVoicesAvailable.show_all_available_voices())
 
     if ocr_text_window is None or not ocr_text_window.winfo_exists():
         ocr_text_window = tk.Toplevel(root)
@@ -91,7 +95,6 @@ def ocr_preview(event):
         ocr_text_window.iconbitmap("Resources/lotrotospeech.ico")
         ocr_text_window.attributes("-topmost", True)
 
-        # Create and pack the Text widget
         ocr_text_widget = tk.Text(ocr_text_window, wrap=tk.WORD)
         ocr_text_widget.pack(fill=tk.BOTH, expand=True)
 
@@ -104,14 +107,15 @@ def ocr_preview(event):
         menu.add_command(label="Generate Audio", command=lambda: startThreads.start_monitoring(
             lambda: manual_audio_generation(ocr_text_widget.get("1.0", "end-1c"))))
 
+        menu.add_command(label="Show all voices from Elevenlabs", command=lambda: startThreads.start_monitoring(
+            lambda: show_voices()))
+
         menu_bar.add_cascade(label="Menu", menu=menu)
 
         ocr_text_window.config(menu=menu_bar)
 
-        # Center the window on the screen with a minimum size
-        center_window(ocr_text_window, 500, 500)  # Adjust the minimum size as needed
+        center_window(ocr_text_window, 500, 500)
     else:
-        # If the window exists, bring it to the top (optional)
         ocr_text_window.attributes("-topmost", True)
 
 
@@ -177,5 +181,7 @@ if globalVariables.start_x:
 lookForTesseract.look_for_tesseract()
 
 startThreads.start_monitoring(monitor_loop)
+
+globalVariables.elevenlabs_default_voice = getElevenLabsAvailableVoice.get_elevenlabs_default_voice()
 
 root.mainloop()

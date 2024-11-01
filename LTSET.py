@@ -14,10 +14,9 @@ import createAllFilesAndDirectories
 
 rect_color = "#ffcccb"
 
-# Initialize Pygame
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.stop()  # Stop the initial Pygame playback
+pygame.mixer.music.stop()
 
 
 def on_press(event):
@@ -64,15 +63,12 @@ def on_release(event):
 
 
 def center_window(window, min_width, min_height):
-    # Get the screen width and height
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
 
-    # Calculate the x and y coordinates for centering
     x = (screen_width - min_width) // 2
     y = (screen_height - min_height) // 2
 
-    # Set the window's geometry to center it on the screen
     window.geometry(f"{min_width}x{min_height}+{x}+{y}")
 
 
@@ -80,7 +76,6 @@ def ocr_preview(event):
     global ocr_text_window, ocr_text_widget
 
     def get_ocr():
-        # Clear existing text
         ocr_text_widget.delete(1.0, tk.END)
         ocr_text_widget.insert(tk.END, globalVariables.text_ocr)
 
@@ -91,7 +86,6 @@ def ocr_preview(event):
         ocr_text_window.iconbitmap("Resources/lotrotospeech.ico")
         ocr_text_window.attributes("-topmost", True)
 
-        # Create and pack the Text widget
         ocr_text_widget = tk.Text(ocr_text_window, wrap=tk.WORD)
         ocr_text_widget.pack(fill=tk.BOTH, expand=True)
 
@@ -109,10 +103,8 @@ def ocr_preview(event):
 
         ocr_text_window.config(menu=menu_bar)
 
-        # Center the window on the screen with a minimum size
         center_window(ocr_text_window, 500, 500)  # Adjust the minimum size as needed
     else:
-        # If the window exists, bring it to the top (optional)
         ocr_text_window.attributes("-topmost", True)
 
 

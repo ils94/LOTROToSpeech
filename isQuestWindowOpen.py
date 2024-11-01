@@ -10,17 +10,12 @@ def is_image_on_screen():
 
     image_files = []
 
-    # Specify the external directory path
     external_directory = globalVariables.image_detection_path
 
-    # Iterate over files in the external directory
     for filename in os.listdir(external_directory):
-        # Check if the file has a common image file extension (e.g., jpg, png, jpeg)
         if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
-            # If it's an image file, add it to the list
             image_files.append(os.path.join(external_directory, filename))
 
-    # If no image files were found in the external directory, use the fallback directory
     if not image_files:
         image_directory = r"Resources/Images"
         for filename in os.listdir(image_directory):

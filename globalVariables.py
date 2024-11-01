@@ -12,6 +12,8 @@ text_ocr = ""
 
 tesseract_language = ""
 
+elevenlabs_default_voice = None
+
 audio_path_string = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Audios"
 config_path = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Configs"
 image_detection_path = str(Path.home() / 'Documents') + r"/LOTROToSpeech/Detection"

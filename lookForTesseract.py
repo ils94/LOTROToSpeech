@@ -16,9 +16,9 @@ def create_tesseract_path_file():
 
     try:
         with open(globalVariables.config_path + r"/tesseract_path.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
+            pass
     except FileExistsError:
-        pass  # File already exists, no need to create it
+        pass
 
 
 def create_tesseract_lang_file():
@@ -27,9 +27,9 @@ def create_tesseract_lang_file():
 
     try:
         with open(globalVariables.config_path + r"/tesseract_lang.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
+            pass
     except FileExistsError:
-        pass  # File already exists, no need to create it
+        pass
 
 
 def load_tesseract_lang():
@@ -41,7 +41,7 @@ def load_tesseract_lang():
             lines = file.readlines()
 
             if len(lines) > 0:
-                lang = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
+                lang = lines[0].strip()
 
             return lang
     except FileNotFoundError:
@@ -56,7 +56,7 @@ def load_tesseract_path():
             lines = file.readlines()
 
             if len(lines) > 0:
-                path = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
+                path = lines[0].strip()
 
             return path
     except FileNotFoundError:

@@ -18,9 +18,8 @@ def play_audio(audio):
     pygame.mixer.music.play()
 
     while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)  # Adjust the playback speed as needed
+        pygame.time.Clock().tick(10)
 
-    # Unload the audio to free up memory
     pygame.mixer.music.unload()
 
 

@@ -9,7 +9,6 @@ female_voice_file_path = globalVariables.voices_path + r"/Female Voices.txt"
 def get_voice(file_path):
     create_voices_path_files()
 
-    # Initialize an empty list to store lines from the file
     lines = []
 
     if "Male" in file_path:
@@ -20,15 +19,11 @@ def get_voice(file_path):
             file_path = female_voice_file_path
 
     try:
-        # Open the file in read mode
         with open(file_path, 'r') as file:
-            # Read each line from the file and split by "\n"
             for line in file:
                 lines.extend(line.strip().split('\n'))
 
-        # Check if there are any lines in the list
         if lines:
-            # Randomly select and return one element from the list
             random_element = random.choice(lines)
             return random_element
         else:
@@ -44,8 +39,8 @@ def create_voices_path_files():
 
     try:
         with open(globalVariables.voices_path + r"/Female Voices.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
+            pass
         with open(globalVariables.voices_path + r"/Male Voices.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
+            pass
     except FileExistsError:
-        pass  # File already exists, no need to create it
+        pass

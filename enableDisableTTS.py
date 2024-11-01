@@ -9,7 +9,9 @@ def enable_disable_tts():
         notification.notify(
             title="LOTRO To Speech",
             message="TTS is now Disabled",
-            app_icon="Resources/lotrotospeech.ico"
+            app_icon="Resources/lotrotospeech.ico",
+            app_name="LOTRO To Speech",
+            timeout=3
         )
 
     else:
@@ -18,5 +20,7 @@ def enable_disable_tts():
         notification.notify(
             title="LOTRO To Speech",
             message="TTS is now Enabled",
-            app_icon="Resources/lotrotospeech.ico"
+            app_icon="Resources/lotrotospeech.ico",
+            app_name="LOTRO To Speech",
+            timeout=3
         )

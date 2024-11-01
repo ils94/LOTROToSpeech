@@ -17,17 +17,15 @@ def load_api_key():
         return ""
 
 
-def get_elevenlabs_default_voice():
+def show_all_available_voices():
     client = ElevenLabs(api_key=load_api_key())
 
     response = client.voices.get_all()
 
-    male_voice = next((voice for voice in response.voices if voice.labels.get("gender") == "male"), None)
-    female_voice = next((voice for voice in response.voices if voice.labels.get("gender") == "female"), None)
+    male_voices = [voice.name for voice in response.voices if voice.labels.get("gender") == "male"]
+    female_voices = [voice.name for voice in response.voices if voice.labels.get("gender") == "female"]
 
-    selected_voice = male_voice if male_voice else female_voice
+    # Build the string output
+    result = "Male voices:\n" + "\n".join(male_voices) + "\n\nFemale voices:\n" + "\n".join(female_voices)
 
-    if selected_voice:
-        return selected_voice.name
-    else:
-        return ""
+    return result

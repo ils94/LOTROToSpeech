@@ -2,7 +2,8 @@ import pygame
 import os
 import re
 import globalVariables
-from elevenlabs import generate, set_api_key, save
+from elevenlabs import save
+from elevenlabs.client import ElevenLabs
 import time
 from tkinter import messagebox
 import setVoiceByGender
@@ -19,9 +20,8 @@ def play_audio(audio):
     pygame.mixer.music.play()
 
     while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)  # Adjust the playback speed as needed
+        pygame.time.Clock().tick(10)
 
-    # Unload the audio to free up memory
     pygame.mixer.music.unload()
 
 
@@ -30,12 +30,10 @@ def tts_engine(text):
     create_elevenlabs_model_file()
 
     if not os.path.exists(globalVariables.audio_path_string):
-        # If it doesn't exist, create it
         os.makedirs(globalVariables.audio_path_string)
 
     words = text.split()
 
-    # Take the first 5 words
     first_5_words = "".join(words[:5]).lower()
 
     first_5_words = re.sub(r'[^a-zA-Z0-9]', '', first_5_words)
@@ -55,16 +53,20 @@ def tts_engine(text):
         if text:
             if key:
                 try:
-                    set_api_key(key)
+                    client = ElevenLabs(
+                        api_key=key,
+                    )
 
                     voice = setVoiceByGender.set_voice("elevenlabs")
+
+                    print(voice)
 
                     if model:
                         set_model = model
                     else:
-                        set_model = "eleven_monolingual_v1"
+                        set_model = "eleven_multilingual_v2"
 
-                    audio = generate(
+                    audio = client.generate(
                         text=text,
                         voice=voice,
                         model=set_model
@@ -89,9 +91,9 @@ def create_api_key_file():
 
     try:
         with open(globalVariables.config_path + r"/api_key.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
+            pass
     except FileExistsError:
-        pass  # File already exists, no need to create it
+        pass
 
 
 def load_api_key():
@@ -102,7 +104,7 @@ def load_api_key():
             lines = file.readlines()
 
             if len(lines) > 0:
-                key = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
+                key = lines[0].strip()
 
             return key
     except FileNotFoundError:
@@ -115,9 +117,9 @@ def create_elevenlabs_model_file():
 
     try:
         with open(globalVariables.config_path + r"/elevenlabs_model.txt", "x") as file:
-            pass  # This creates an empty file if it doesn't exist
+            pass
     except FileExistsError:
-        pass  # File already exists, no need to create it
+        pass
 
 
 def load_elevenlabs_model():
@@ -128,7 +130,7 @@ def load_elevenlabs_model():
             lines = file.readlines()
 
             if len(lines) > 0:
-                model = lines[0].strip()  # Use strip() to remove leading/trailing whitespace
+                model = lines[0].strip()
 
             return model
     except FileNotFoundError:
