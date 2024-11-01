@@ -20,6 +20,8 @@ pygame.init()
 pygame.mixer.init()
 pygame.mixer.music.stop()
 
+def get_default_voice():
+    globalVariables.elevenlabs_default_voice = getElevenLabsAvailableVoice.get_elevenlabs_default_voice()
 
 def on_press(event):
     global rect
@@ -182,6 +184,6 @@ lookForTesseract.look_for_tesseract()
 
 startThreads.start_monitoring(monitor_loop)
 
-globalVariables.elevenlabs_default_voice = getElevenLabsAvailableVoice.get_elevenlabs_default_voice()
+startThreads.start_monitoring(get_default_voice)
 
 root.mainloop()

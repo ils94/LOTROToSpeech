@@ -64,7 +64,7 @@ def tts_engine(text):
                     if model:
                         set_model = model
                     else:
-                        set_model = "eleven_multilingual_v2"
+                        set_model = "eleven_turbo_v2_5"
 
                     audio = client.generate(
                         text=text,
